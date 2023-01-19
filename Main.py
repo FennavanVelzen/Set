@@ -36,6 +36,12 @@ def Kaarten():
     return Kaarten
 
 
+"""Fuctie voor het tonen van text"""
+def print_text():
+    font = pygame.font.SysFont("Times New Roman", 40, True, False)
+    service = font.render( "Test", True, (BLACK))
+    WIN.blit(service, (200, 200))
+
 """Main funcitie die alle functies los oproept"""
 def main():
     clock = pygame.time.Clock()
@@ -46,6 +52,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
         WIN.fill(LILA)
+        print_text()   #print_text functie niet werken
         pygame.display.update()
     pygame.quit()
 
