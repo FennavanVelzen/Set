@@ -35,12 +35,39 @@ def Kaarten():
                     Kaarten.append(Kaart)
         
     return Kaarten
+
+
 """Een functie die text print in het scherm"""
 def text(Text):
-    font = pygame.font.SysFont("Times New Roman", 40, True, False)
+    font = pygame.font.SysFont("Times New Roman", 50, True, False)
     service = font.render( Text , True, (BLACK))
-    WIN.blit(service, (200, 200))
+    WIN.blit(service, (0, 0))
 
+
+"""Functies voor het maken van de 3 figuren, vol en leeg"""
+GOLF = [(300, 300), (250, 250), (200, 300), (150, 250)] #hoekputen
+RUIT = [(400, 360), (350, 400), (400, 440), (450, 400)] #hoekputen
+OVAAL = (40, 50, 130, 50)                               #hoekputen
+
+def GolfVOL():
+    pygame.draw.polygon(WIN, BLACK , GOLF)
+
+def GolfLEEG():
+    pygame.draw.polygon(WIN, BLACK , GOLF ,3)
+    
+def RuitVOL():
+    pygame.draw.polygon(WIN, BLACK , RUIT)
+
+def RuitLEEG():
+    pygame.draw.polygon(WIN, BLACK , RUIT,3)
+    
+def OvaalVOL():
+    pygame.draw.ellipse(WIN, BLACK, OVAAL)
+
+def OvaalLEEG():
+    pygame.draw.ellipse(WIN, BLACK, OVAAL)
+    
+    
 """Main funcitie die alle functies los oproept"""
 def main():
     clock = pygame.time.Clock()
