@@ -6,12 +6,13 @@ Created on Wed Jan 18 10:50:46 2023
 """
 
 import pygame
+pygame.init()
 
 WIN = pygame.display.set_mode((600, 600))
 pygame.display.set_caption("Set")
 FPS = 60
 
-#RGB kleuren
+#Kleuren RGB
 WHITE = (255, 255, 255)
 LILA = 	(220,175,255)
 BLACK = (0,0,0)
@@ -34,7 +35,11 @@ def Kaarten():
                     Kaarten.append(Kaart)
         
     return Kaarten
-
+"""Een functie die text print in het scherm"""
+def text(Text):
+    font = pygame.font.SysFont("Times New Roman", 40, True, False)
+    service = font.render( Text , True, (BLACK))
+    WIN.blit(service, (200, 200))
 
 """Main funcitie die alle functies los oproept"""
 def main():
@@ -46,6 +51,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
         WIN.fill(LILA)
+        text("Set")
         pygame.display.update()
     pygame.quit()
 
