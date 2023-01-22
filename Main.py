@@ -6,6 +6,7 @@ Created on Wed Jan 18 10:50:46 2023
 """
 
 import pygame
+import random
 pygame.init()
 
 WIN = pygame.display.set_mode((600, 600))
@@ -36,6 +37,17 @@ def Kaarten():
         
     return Kaarten
 
+"""Fuctie voor het schudden van de lijst met kaarten, deze functie gaat twee keer door
+dezelfde for loop zodat de hoeveelheid kaarten beter geschud is"""
+def Schudden(Kaarten):
+    for positie in range(len(Kaarten)):
+        WillekeurigGetal = random.randint(0,(len(Kaarten)-1))
+        Kaarten[positie], Kaarten[WillekeurigGetal] = Kaarten[WillekeurigGetal], Kaarten[positie]
+    for positie in range(len(Kaarten)):
+        WillekeurigGetal = random.randint(0,(len(Kaarten)-1))
+        Kaarten[positie], Kaarten[WillekeurigGetal] = Kaarten[WillekeurigGetal], Kaarten[positie]
+    return Kaarten
+    
 
 """Een functie die text print in het scherm"""
 def text(Text):
