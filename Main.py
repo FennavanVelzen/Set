@@ -7,6 +7,7 @@ Created on Wed Jan 18 10:50:46 2023
 
 import pygame
 import random
+import os
 pygame.init()
 
 WIN = pygame.display.set_mode((600, 600))
@@ -17,6 +18,10 @@ FPS = 60
 WHITE = (255, 255, 255)
 LILA = 	(220,175,255)
 BLACK = (0,0,0)
+RED = (255,0,0)
+GREEN = (255,0,0)
+BLUE = (0,0,255)
+PURPLE = (255,0,255)
 
 #Alle vorm en vulling combinaties
 R_Ruit_Leeg = pygame.image.load("R_Ruit_Leeg.png")
@@ -120,7 +125,23 @@ def OvaalVOL():
 
 def OvaalLEEG():
     pygame.draw.ellipse(WIN, BLACK, OVAAL)
-    
+
+def set_color(img, color):
+    r, g, b = color
+    for x in range(img.get_width()):
+        for y in range(img.get_height()):
+            a = img.get_at((x, y))[3]
+            img.set_at((x, y), (r,g,b,a))  # Set the color of the pixel.
+
+DVD = pygame.image.load(os.path.join('Assets', 'DVDWHITE.png'))
+set_color(DVD, BLUE)
+
+def Draw():
+    WIN.fill(LILA)
+    text("Set")
+    WIN.blit(DVD, (20,20))
+    pygame.display.update()
+
     
 """Main funcitie die alle functies los oproept"""
 def main():
@@ -131,9 +152,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-        WIN.fill(LILA)
-        text("Set")
-        pygame.display.update()
+        Draw()
     pygame.quit()
 
 if __name__ == "__main__":
