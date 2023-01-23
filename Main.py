@@ -93,12 +93,12 @@ def text(Text):
 
 """Functies om kaarten met 2 en 3 vormen te maken, met de posities het midden 
 van de kaart"""
-def vormen2(vorm, positiex, positiey):
-    WIN.blit(vorm,(positiex, positiey + 25) )
+def vormen2(vorm, positiex, positiey): #nog nodig hoekpunten kaart
+    WIN.blit(vorm,(positiex, positiey + 25) ) #nog aan aanpassen met hoekputen kaart
     WIN.blit(vorm, (positiex, positiey - 25))
 
-def vormen3(vorm, positiex, positiey):
-    WIN.blit(vorm, (positiex, positiey +50))
+def vormen3(vorm, positiex, positiey):  #nog nodig hoekpunten kaart
+    WIN.blit(vorm, (positiex, positiey +50)) #nog aan aanpassen met hoekputen kaart
     WIN.blit(vorm, (positiex, positiey))
     WIN.blit(vorm, (positiex, positiey -50))
     
@@ -126,6 +126,8 @@ def OvaalVOL():
 def OvaalLEEG():
     pygame.draw.ellipse(WIN, BLACK, OVAAL)
 
+
+"""Een fuctie die een afbeedling pixel voor pixel van kleur veranderd"""
 def set_color(img, color):
     r, g, b = color
     for x in range(img.get_width()):
@@ -133,13 +135,19 @@ def set_color(img, color):
             a = img.get_at((x, y))[3]
             img.set_at((x, y), (r,g,b,a))  # Set the color of the pixel.
 
+#dingen testen
 DVD = pygame.image.load(os.path.join('Assets', 'DVDWHITE.png'))
-set_color(DVD, BLUE)
+set_color(DVD, BLACK)
 
+<<<<<<< HEAD
+
+"""Een functie om alles op het scherm te tekenen"""
+=======
+"""Draw functie die alle objecten die getekent moeten worden samen brengt"""
+>>>>>>> 95c3608f5a6bc174e314ae6f37fb806bf10d994a
 def Draw():
     WIN.fill(LILA)
     text("Set")
-    WIN.blit(DVD, (20,20))
     pygame.display.update()
 
     
