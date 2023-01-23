@@ -10,13 +10,13 @@ import random
 import os
 pygame.init()
 
-WIN = pygame.display.set_mode((600, 600))
+WIN = pygame.display.set_mode((800, 700))
 pygame.display.set_caption("Set")
 FPS = 60
 
 #Kleuren RGB
 WHITE = (255, 255, 255)
-LILA = 	(220,175,255)
+LILA = 	(210,175,255)
 BLACK = (0,0,0)
 RED = (255,0,0)
 GREEN = (255,0,0)
@@ -91,16 +91,24 @@ def text(Text):
     service = font.render( Text , True, (BLACK))
     WIN.blit(service, (0, 0))
 
-"""Functies om kaarten met 2 en 3 vormen te maken, met de posities het midden 
-van de kaart"""
+"""Functies om kaarten vormen te maken, van de linker boven hoek van de kaarten"""
+def vormen1(vorm, positiex, positiey):
+    x = positiex+10
+    y = positiey+120
+    WIN.blit(vorm, (x,y))
+
 def vormen2(vorm, positiex, positiey): #nog nodig hoekpunten kaart
-    WIN.blit(vorm,(positiex, positiey + 25) ) #nog aan aanpassen met hoekputen kaart
-    WIN.blit(vorm, (positiex, positiey - 25))
+    x = positiex+10
+    y = positiey+120
+    WIN.blit(vorm,(x, y + 25) ) #nog aan aanpassen met hoekputen kaart
+    WIN.blit(vorm, (x, y - 25))
 
 def vormen3(vorm, positiex, positiey):  #nog nodig hoekpunten kaart
-    WIN.blit(vorm, (positiex, positiey +50)) #nog aan aanpassen met hoekputen kaart
-    WIN.blit(vorm, (positiex, positiey))
-    WIN.blit(vorm, (positiex, positiey -50))
+    x = positiex+10
+    y = positiey+120
+    WIN.blit(vorm, (x, y +50)) #nog aan aanpassen met hoekputen kaart
+    WIN.blit(vorm, (x, y))
+    WIN.blit(vorm, (x, y -50))
     
 
 """Functies voor het maken van de 3 figuren, vol en leeg"""
@@ -127,6 +135,83 @@ def OvaalLEEG():
     pygame.draw.ellipse(WIN, BLACK, OVAAL)
 
 
+"""Functie voor grit visualiseren"""
+def Grit15():
+    font = pygame.font.SysFont("Times New Roman", 50, True, False)
+    service = font.render( "." , True, (BLACK))
+    lijn = font.render( "|" , True, (BLACK))
+    WIN.blit(lijn, (150,0))
+    WIN.blit(service, (175, 0))
+    WIN.blit(service, (275, 0))
+    WIN.blit(service, (300, 0))
+    WIN.blit(service, (400, 0))
+    WIN.blit(service, (425, 0))
+    WIN.blit(service, (525, 0))
+    WIN.blit(service, (550, 0))
+    WIN.blit(service, (650, 0))
+    WIN.blit(service, (675, 0))
+    WIN.blit(service, (775, 0))
+    WIN.blit(lijn, (150,200))
+    WIN.blit(service, (175, 200))
+    WIN.blit(service, (275, 200))
+    WIN.blit(service, (300, 200))
+    WIN.blit(service, (400, 200))
+    WIN.blit(service, (425, 200))
+    WIN.blit(service, (525, 200))
+    WIN.blit(service, (550, 200))
+    WIN.blit(service, (650, 200))
+    WIN.blit(service, (675, 200))
+    WIN.blit(service, (775, 200))
+    WIN.blit(lijn, (150,225))
+    WIN.blit(service, (175, 225))
+    WIN.blit(service, (275, 225))
+    WIN.blit(service, (300, 225))
+    WIN.blit(service, (400, 225))
+    WIN.blit(service, (425, 225))
+    WIN.blit(service, (525, 225))
+    WIN.blit(service, (550, 225))
+    WIN.blit(service, (650, 225))
+    WIN.blit(service, (675, 225))
+    WIN.blit(service, (775, 225))
+    WIN.blit(lijn, (150,425))
+    WIN.blit(service, (175, 425))
+    WIN.blit(service, (275, 425))
+    WIN.blit(service, (300, 425))
+    WIN.blit(service, (400, 425))
+    WIN.blit(service, (425, 425))
+    WIN.blit(service, (525, 425))
+    WIN.blit(service, (550, 425))
+    WIN.blit(service, (650, 425))
+    WIN.blit(service, (675, 425))
+    WIN.blit(service, (775, 425))
+    WIN.blit(lijn, (150,450))
+    WIN.blit(service, (175, 450))
+    WIN.blit(service, (275, 450))
+    WIN.blit(service, (300, 450))
+    WIN.blit(service, (400, 450))
+    WIN.blit(service, (425, 450))
+    WIN.blit(service, (525, 450))
+    WIN.blit(service, (550, 450))
+    WIN.blit(service, (650, 450))
+    WIN.blit(service, (675, 450))
+    WIN.blit(service, (775, 450))
+    WIN.blit(service, (25, 450))
+    WIN.blit(service, (125, 450))
+    WIN.blit(lijn, (150,650))
+    WIN.blit(service, (175, 650))
+    WIN.blit(service, (275, 650))
+    WIN.blit(service, (300, 650))
+    WIN.blit(service, (400, 650))
+    WIN.blit(service, (425, 650))
+    WIN.blit(service, (525, 650))
+    WIN.blit(service, (550, 650))
+    WIN.blit(service, (650, 650))
+    WIN.blit(service, (675, 650))
+    WIN.blit(service, (775, 650))
+    WIN.blit(service, (25, 650))
+    WIN.blit(service, (125, 650))
+
+
 """Een fuctie die een afbeedling pixel voor pixel van kleur veranderd"""
 def set_color(img, color):
     r, g, b = color
@@ -144,6 +229,10 @@ set_color(DVD, BLACK)
 def Draw():
     WIN.fill(LILA)
     text("Set")
+    Grit15()
+    vormen1(R_Ovaal_Gestreept, 175, 225)
+    vormen2(G_Golf_Vol, 175, 0)
+    vormen3(P_Ruit_Leeg, 175, 450)
     pygame.display.update()
 
     
