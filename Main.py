@@ -139,12 +139,7 @@ def set_color(img, color):
 DVD = pygame.image.load(os.path.join('Assets', 'DVDWHITE.png'))
 set_color(DVD, BLACK)
 
-<<<<<<< HEAD
-
 """Een functie om alles op het scherm te tekenen"""
-=======
-"""Draw functie die alle objecten die getekent moeten worden samen brengt"""
->>>>>>> 95c3608f5a6bc174e314ae6f37fb806bf10d994a
 def Draw():
     WIN.fill(LILA)
     text("Set")
