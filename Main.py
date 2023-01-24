@@ -21,7 +21,7 @@ BLACK = (0,0,0)
 RED = (255,0,0)
 GREEN = (255,0,0)
 BLUE = (0,0,255)
-PURPLE = (255,0,255)
+PURPLE = (150,0,255)
 
 #Alle vorm en vulling combinaties
 R_Ruit_Leeg = pygame.image.load("Assets/R_Ruit_Leeg.png")
@@ -52,6 +52,9 @@ P_Ovaal_Leeg  = pygame.image.load("Assets/P_Ovaal_Leeg.png")
 P_Ovaal_Gestreept  = pygame.image.load("Assets/P_Ovaal_Gestreept.png")
 P_Ovaal_Vol  = pygame.image.load("Assets/P_Ovaal_Vol.png")
 
+#achterkant kaart
+achterkant = pygame.image.load("Assets/Achterkant.png")
+Achterkant = pygame.transform.scale(achterkant, (150,230))
 
 
 """Functie om alle combinatie mogelijkheden voor kaarten te genereren.
@@ -86,10 +89,10 @@ def Schudden(Kaarten):
     
 
 """Een functie die text print in het scherm"""
-def text(Text):
-    font = pygame.font.SysFont("Times New Roman", 50, True, False)
-    service = font.render( Text , True, (BLACK))
-    WIN.blit(service, (0, 0))
+def text(Text, positie, kleur,lettergrote):
+    font = pygame.font.SysFont("Times New Roman", lettergrote, True, False)
+    service = font.render( Text , True, kleur)
+    WIN.blit(service, positie)
 
 """Functies om kaarten vormen te maken, van de linker boven hoek van de kaarten"""
 def vormen1(vorm, positiex, positiey):
@@ -110,6 +113,11 @@ def vormen3(vorm, positiex, positiey):  #nog nodig hoekpunten kaart
     WIN.blit(vorm, (x, y))
     WIN.blit(vorm, (x, y -50))
     
+"""functie voor het schrijven van de nummers in de hoeken van de kaarten"""
+def Nummeriek(a, positiex, positiey):
+    x = positiex+15
+    y = positiey+40
+    text(a, (x, y), (BLACK) , 30)
 
 """Functies voor het maken van de 3 figuren, vol en leeg"""
 GOLF = [(300, 300), (250, 250), (200, 300), (150, 250)] #hoekputen
@@ -225,27 +233,71 @@ DVD = pygame.image.load(os.path.join('Assets', 'DVDWHITE.png'))
 set_color(DVD, BLACK)
 
 
-"""Een functie om alles op het scherm te tekenen"""
-def Draw():
+"""Een functie om alles op het scherm te tekenen, voor tijdens het spel"""
+def DrawSpel():
     WIN.fill(LILA)
-    text("Set")
+    text("Set",(0, 0),(BLACK),50)
     Grit15()
     vormen1(R_Ovaal_Gestreept, 175, 225)
     vormen2(G_Golf_Vol, 175, 0)
     vormen3(P_Ruit_Leeg, 175, 450)
+    Nummeriek("1",175, 0)
+    WIN.blit(Achterkant, (10, 475))
     pygame.display.update()
 
+"""Een functie om alles op het scherm te tekenen, voor het startscherm"""
+def DrawStart():
+    WIN.fill(LILA)
+    text("Set",(325, 250),(PURPLE),100)
+    text(" |Klik op spatie om te beginnen|", (75,350),(BLACK),50)
+    text(" |Klik op r voor de regels|", (75,400),(BLACK),50)
+    pygame.display.update()
     
+"""Een functie om alles op het scherm te tekenen, voor het regelscherm"""  
+def Drawrules():
+    WIN.fill(LILA)
+    text("Regels", (0,0),(BLACK),50)
+    text("Klik b om terug te gaan", (0,50),(BLACK),50)
+    pygame.display.update()
+    
+"""functie voor het kunnen aanroepen van een quit voor wanneer er een loop is"""
+def Quit():
+    run = True
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+    return run
+    
+#de main functie moet netter gemaakt worden door bepaalde stukken als tussen functies toe te voegen
 """Main funcitie die alle functies los oproept"""
 def main():
     clock = pygame.time.Clock()
     run = True
+    start = False
     while run:
         clock.tick(FPS)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-        Draw()
+        run = Quit()
+        while not start and run:
+            run = Quit()
+            DrawStart()
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        start = True
+                    elif event.key == pygame.K_r:       #r om naar regels te gaan
+                        rules = True
+                        while rules and run:
+                            Drawrules()
+                            for event in pygame.event.get():
+                                if event.type == pygame.KEYDOWN:
+                                    if event.key == pygame.K_b:     #b om terug te gaan naar start
+                                        rules = False
+                                if event.type == pygame.QUIT:       #zodat quit mogelijk blijft in de loop
+                                    run = False
+                if event.type == pygame.QUIT:       #zodat quit mogelijk blijft in de loop
+                    run = False
+            
+        DrawSpel()
     pygame.quit()
 
 if __name__ == "__main__":
