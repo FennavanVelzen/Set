@@ -89,6 +89,7 @@ def Schudden(Kaarten):
     
 
 """Een functie die text print in het scherm"""
+
 def text(Text, positie, kleur,lettergrote):
     font = pygame.font.SysFont("Times New Roman", lettergrote, True, False)
     service = font.render( Text , True, kleur)
@@ -261,6 +262,7 @@ def Drawrules():
     pygame.display.update()
     
 """functie voor het kunnen aanroepen van een quit voor wanneer er een loop is"""
+    
 def Quit():
     run = True
     for event in pygame.event.get():
@@ -284,6 +286,7 @@ def main():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         start = True
+
                     elif event.key == pygame.K_r:       #r om naar regels te gaan
                         rules = True
                         while rules and run:
