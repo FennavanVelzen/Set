@@ -21,7 +21,7 @@ BLACK = (0,0,0)
 RED = (255,0,0)
 GREEN = (255,0,0)
 BLUE = (0,0,255)
-PURPLE = (150,0,255)
+PURPLE = (75,0,130)
 
 #Alle vorm en vulling combinaties
 R_Ruit_Leeg = pygame.image.load("Assets/R_Ruit_Leeg.png")
@@ -102,12 +102,12 @@ def text(Text, positie, kleur,lettergrote):
 
 """Functies om kaarten vormen te maken, van de linker boven hoek van de kaarten"""
 def vormen1(vorm, positiex, positiey):
-    x = positiex+5
+    x = positiex+6
     y = positiey+110
     WIN.blit(vorm, (x,y))
 
 def vormen2(vorm, positiex, positiey): #nog nodig hoekpunten kaart
-    x = positiex+10
+    x = positiex+6
     y = positiey+110
     WIN.blit(vorm,(x, y + 25) ) #nog aan aanpassen met hoekputen kaart
     WIN.blit(vorm, (x, y - 25))
@@ -230,14 +230,16 @@ DVD = pygame.image.load(os.path.join('Assets', 'DVDWHITE.png'))
 set_color(DVD, BLACK)
 
 def regels():
-    text("Elke kaart heeft 4 eighenschappen, te weten een hoeveelheid, een kleur," 
-         "een vorm en een vulling. Er zijn drie varienten van elke eigenschap"
-         "Een SET bestaat uit 3 kaarten waarvan voor alle 4 eigenschappen afzonderlijk "
-         "geldt dat de variant ervan precies gelijk of volledig verschillend moeten zijn."
-         "Bij elke combinatie van 3 kaarten stel je jezelf steeds voor elke eigenschap apart de vraag:"
-         "is de variant van deze eigenschap op alle kaarten precies gelijk of volledig"
-         "verschillend? Kan je deze vraag voor alle eigenschappen met JA beantwoorden,"
-         "dan heb je een set gevonden",(20,150),BLACK,25)
+    text("Elke kaart heeft 4 eigenschappen, te weten een hoeveelheid, een kleur," ,(20,150),BLACK,25)
+    text("een vorm en een vulling. Er zijn drie varienten van elke eigenschap",(20,175),BLACK,25)
+    text("Een SET bestaat uit 3 kaarten waarvan voor alle 4 eigenschappen ",(20,200),BLACK,25)
+    text("afzonderlijk geldt dat de variant ervan precies gelijk of volledig",(20,225),BLACK,25)
+    text("verschillend moeten zijn. Bij elke combinatie van 3 kaarten stel je jezef" ,(20,250),BLACK,25)
+    text("steeds voor elke eigenschap apart de vraag: is de variant van deze",(20,275),BLACK,25)
+    text("eigenschap op alle kaarten precies gelijk of volledig verschillend? ",(20,300),BLACK,25)
+    text("Kan je deze vraag voor alle eigenschappen met JA beantwoorden, dan",(20,325),BLACK,25)
+    text("heb je een set gevonden.",(20,350),BLACK,25)
+    text("Uit handleiding SET, Marsha J. Falco",(20,375),BLACK, 15)    
 
 """Een fuctie die op basis van de eigenschappen van de kaart en locatie deze kan tekenen"""
 #deze functie zou misschien nog ingekort en verbeterd worden.
@@ -269,7 +271,7 @@ def DrawKaart(kaart, locatie):
                     vormen2(R_Ruit_Vol, locatie)
                 else:
                     vormen3(R_Ruit_Vol, locatie)
-        if kaart[1] == 'Ovaal':                         #het vorige harhaald door de rest van de code
+        if kaart[1] == 'Ovaal':                         #het vorige harhaald door de rest van de functie
             if kaart[2] == 'Leeg':
                 if kaart[3] == 1:
                     vormen1(R_Ovaal_Leeg, locatie)
@@ -473,53 +475,89 @@ def DrawStart():
 def Drawrules():
     WIN.fill(LILA)
     text("Regels", (0,0),(BLACK),50)
-    text("Klik b om terug te gaan", (0,50),(BLACK),50)
-    text("Klik v naar voorbeelden te gaan", (0,100), (BLACK),50)
+    text("Klik b om terug te gaan", (0,50),(BLACK),40)
+    text("Klik v naar voorbeelden te gaan", (0,100), (BLACK),40)
     regels()
-#    WIN.blit(Voorbeelden, (0,0))
+                
+    pygame.display.update()
 
+"""Een functie om alles op het scherm te tekenen, voor het voorbeeldenscherm"""  
+def Drawvoorbeeld():
+    WIN.fill(LILA)
+    text("Set",(0, 0),(BLACK),50)
+    text("Klik b om terug te gaan", (0,625),(BLACK),30)
+    WIN.blit(Voorbeelden, (175,0))
     pygame.display.update()
     
-"""functie voor het kunnen aanroepen van een quit voor wanneer er een loop is"""
-    
+"""functie voor het kunnen aanroepen van een quit voor wanneer er een loop is""" 
 def Quit():
     run = True
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
     return run
-    
-#de main functie moet netter gemaakt worden door bepaalde stukken als tussen functies toe te voegen
+
+
+"""Funcite voor het navigeren tussen de verschillende schermen
+b - back, spatie-start, r -regels, v-voorbeelden"""
+def navigatie(run):
+    start = False
+    rules = False
+    voorbeeld = False
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                start = True
+            if event.key == pygame.K_r:
+                rules = True
+
+    while start and run:                            #Startscherm
+        DrawSpel()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                return run
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_b:
+                    start = False
+        
+    while rules and run:                            #Regelscerm
+        Drawrules()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                return run
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_v:
+                    voorbeeld = True
+                    rules = False
+                if event.key == pygame.K_b:
+                    rules = False
+    while voorbeeld and run:                        #Voorbeeldenscherm
+        Drawvoorbeeld()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                return run
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_b:
+                    rules = True
+                    voorbeeld = False
+    return run
+
+
 """Main funcitie die alle functies los oproept"""
 def main():
-    clock = pygame.time.Clock()
+    global run
     run = True
-    start = False
+    clock = pygame.time.Clock()
     while run:
         clock.tick(FPS)
-        run = Quit()
-        while not start and run:
-            run = Quit()
-            DrawStart()
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        start = True
-
-                    elif event.key == pygame.K_r:       #r om naar regels te gaan
-                        rules = True
-                        while rules and run:
-                            Drawrules()
-                            for event in pygame.event.get():
-                                if event.type == pygame.KEYDOWN:
-                                    if event.key == pygame.K_b:     #b om terug te gaan naar start
-                                        rules = False
-                                if event.type == pygame.QUIT:       #zodat quit mogelijk blijft in de loop
-                                    run = False
-                if event.type == pygame.QUIT:       #zodat quit mogelijk blijft in de loop
-                    run = False
-            
-        DrawSpel()
+        DrawStart()
+        run = navigatie(run)
+                
     pygame.quit()
 
 if __name__ == "__main__":
