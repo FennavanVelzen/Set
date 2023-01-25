@@ -71,7 +71,7 @@ def Kaarten():
         for vorm in Vormen:
             for aantal in Hoeveelheid:
                 for inhoud in Vulling:
-                    Kaart = [kleur, vorm, aantal, inhoud]
+                    Kaart = [kleur, vorm, inhoud, aantal]
                     Kaarten.append(Kaart)
         
     return Kaarten
@@ -107,7 +107,8 @@ def vormen2(vorm, positiex, positiey): #nog nodig hoekpunten kaart
     WIN.blit(vorm,(x, y + 25) ) #nog aan aanpassen met hoekputen kaart
     WIN.blit(vorm, (x, y - 25))
 
-def vormen3(vorm, positiex, positiey):  #nog nodig hoekpunten kaart
+def vormen3(vorm, locatie):  #nog nodig hoekpunten kaart
+    positiex, positiey = locatie
     x = positiex+10
     y = positiey+120
     WIN.blit(vorm, (x, y +50)) #nog aan aanpassen met hoekputen kaart
@@ -145,80 +146,70 @@ def OvaalLEEG():
 
 
 """Functie voor grit visualiseren"""
-def Grit15():
+def Grit12():
     font = pygame.font.SysFont("Times New Roman", 50, True, False)
     service = font.render( "." , True, (BLACK))
     lijn = font.render( "|" , True, (BLACK))
-    WIN.blit(lijn, (150,0))
-    WIN.blit(service, (175, 0))
-    WIN.blit(service, (275, 0))
-    WIN.blit(service, (300, 0))
-    WIN.blit(service, (400, 0))
-    WIN.blit(service, (425, 0))
-    WIN.blit(service, (525, 0))
-    WIN.blit(service, (550, 0))
-    WIN.blit(service, (650, 0))
-    WIN.blit(service, (675, 0))
-    WIN.blit(service, (775, 0))
-    WIN.blit(lijn, (150,200))
-    WIN.blit(service, (175, 200))
-    WIN.blit(service, (275, 200))
-    WIN.blit(service, (300, 200))
-    WIN.blit(service, (400, 200))
-    WIN.blit(service, (425, 200))
-    WIN.blit(service, (525, 200))
-    WIN.blit(service, (550, 200))
-    WIN.blit(service, (650, 200))
-    WIN.blit(service, (675, 200))
-    WIN.blit(service, (775, 200))
-    WIN.blit(lijn, (150,225))
-    WIN.blit(service, (175, 225))
-    WIN.blit(service, (275, 225))
-    WIN.blit(service, (300, 225))
-    WIN.blit(service, (400, 225))
-    WIN.blit(service, (425, 225))
-    WIN.blit(service, (525, 225))
-    WIN.blit(service, (550, 225))
-    WIN.blit(service, (650, 225))
-    WIN.blit(service, (675, 225))
-    WIN.blit(service, (775, 225))
-    WIN.blit(lijn, (150,425))
-    WIN.blit(service, (175, 425))
-    WIN.blit(service, (275, 425))
-    WIN.blit(service, (300, 425))
-    WIN.blit(service, (400, 425))
-    WIN.blit(service, (425, 425))
-    WIN.blit(service, (525, 425))
-    WIN.blit(service, (550, 425))
-    WIN.blit(service, (650, 425))
-    WIN.blit(service, (675, 425))
-    WIN.blit(service, (775, 425))
-    WIN.blit(lijn, (150,450))
-    WIN.blit(service, (175, 450))
-    WIN.blit(service, (275, 450))
-    WIN.blit(service, (300, 450))
-    WIN.blit(service, (400, 450))
-    WIN.blit(service, (425, 450))
-    WIN.blit(service, (525, 450))
-    WIN.blit(service, (550, 450))
-    WIN.blit(service, (650, 450))
-    WIN.blit(service, (675, 450))
-    WIN.blit(service, (775, 450))
-    WIN.blit(service, (25, 450))
-    WIN.blit(service, (125, 450))
-    WIN.blit(lijn, (150,650))
-    WIN.blit(service, (175, 650))
-    WIN.blit(service, (275, 650))
-    WIN.blit(service, (300, 650))
-    WIN.blit(service, (400, 650))
-    WIN.blit(service, (425, 650))
-    WIN.blit(service, (525, 650))
-    WIN.blit(service, (550, 650))
-    WIN.blit(service, (650, 650))
-    WIN.blit(service, (675, 650))
-    WIN.blit(service, (775, 650))
-    WIN.blit(service, (25, 650))
-    WIN.blit(service, (125, 650))
+    a = 0
+    WIN.blit(lijn, (150,a))
+    WIN.blit(service, (200, a))
+    WIN.blit(service, (300, a))
+    WIN.blit(service, (350, a))
+    WIN.blit(service, (450, a))
+    WIN.blit(service, (550, a))
+    WIN.blit(service, (600, a))
+    WIN.blit(service, (650, a))
+    WIN.blit(service, (750, a))
+    a = 200
+    WIN.blit(lijn, (150,a))
+    WIN.blit(service, (200, a))
+    WIN.blit(service, (300, a))
+    WIN.blit(service, (350, a))
+    WIN.blit(service, (450, a))
+    WIN.blit(service, (550, a))
+    WIN.blit(service, (600, a))
+    WIN.blit(service, (650, a))
+    WIN.blit(service, (750, a))
+    a = 225
+    WIN.blit(lijn, (150,a))
+    WIN.blit(service, (200, a))
+    WIN.blit(service, (300, a))
+    WIN.blit(service, (350, a))
+    WIN.blit(service, (450, a))
+    WIN.blit(service, (550, a))
+    WIN.blit(service, (600, a))
+    WIN.blit(service, (650, a))
+    WIN.blit(service, (750, a))
+    a = 425
+    WIN.blit(lijn, (150,a))
+    WIN.blit(service, (200, a))
+    WIN.blit(service, (300, a))
+    WIN.blit(service, (350, a))
+    WIN.blit(service, (450, a))
+    WIN.blit(service, (550, a))
+    WIN.blit(service, (600, a))
+    WIN.blit(service, (650, a))
+    WIN.blit(service, (750, a))
+    a = 450
+    WIN.blit(lijn, (150,a))
+    WIN.blit(service, (200, a))
+    WIN.blit(service, (300, a))
+    WIN.blit(service, (350, a))
+    WIN.blit(service, (450, a))
+    WIN.blit(service, (550, a))
+    WIN.blit(service, (600, a))
+    WIN.blit(service, (650, a))
+    WIN.blit(service, (750, a))
+    a =650
+    WIN.blit(lijn, (150,a))
+    WIN.blit(service, (200, a))
+    WIN.blit(service, (300, a))
+    WIN.blit(service, (350, a))
+    WIN.blit(service, (450, a))
+    WIN.blit(service, (550, a))
+    WIN.blit(service, (600, a))
+    WIN.blit(service, (650, a))
+    WIN.blit(service, (750, a))
 
 
 """Een fuctie die een afbeedling pixel voor pixel van kleur veranderd"""
@@ -233,15 +224,221 @@ def set_color(img, color):
 DVD = pygame.image.load(os.path.join('Assets', 'DVDWHITE.png'))
 set_color(DVD, BLACK)
 
+"""Een fuctie die op basis van de eigenschappen van de kaart en locatie deze kan tekenen"""
+#deze functie zou misschien nog ingekort en verbeterd worden.
+def DrawKaart(kaart, locatie):
+    if kaart[0] == 'Rood':                              #alles voor rood
+        if kaart[1] == 'Ruit':                          #alles voor ruit en rood
+            if kaart[2] == 'Leeg':                      #alles voor ruit en rood en leeg
+                if kaart[3] == 1:
+                    vormen1(R_Ruit_Leeg, locatie)
+                elif kaart[2] == 2:
+                    vormen2(R_Ruit_Leeg, locatie)
+                else:
+                    vormen3(R_Ruit_Leeg, locatie)
+            elif kaart[2] == 'Gestreept':               #alles voor ruit en rood en gestreept
+                if kaart[3] == 1:
+                    vormen1(R_Ruit_Gestreept, locatie)
+                elif kaart[2] == 2:
+                    vormen2(R_Ruit_Gestreept, locatie)
+                else:
+                    vormen3(R_Ruit_Gestreept, locatie)
+            elif kaart[2] == 'Vol':                     #alles voor ruit en rood en vol
+                if kaart[3] == 1:
+                    vormen1(R_Ruit_Vol, locatie)
+                elif kaart[2] == 2:
+                    vormen2(R_Ruit_Vol, locatie)
+                else:
+                    vormen3(R_Ruit_Vol, locatie)
+        if kaart[1] == 'Ovaal':                         #het vorige harhaald door de rest van de code
+            if kaart[2] == 'Leeg':
+                if kaart[3] == 1:
+                    vormen1(R_Ovaal_Leeg, locatie)
+                elif kaart[2] == 2:
+                    vormen2(R_Ovaal_Leeg, locatie)
+                else:
+                    vormen3(R_Ovaal_Leeg, locatie)
+            elif kaart[2] == 'Gestreept':
+                if kaart[3] == 1:
+                    vormen1(R_Ovaal_Gestreept, locatie)
+                elif kaart[2] == 2:
+                    vormen2(R_Ovaal_Gestreept, locatie)
+                else:
+                    vormen3(R_Ovaal_Gestreept, locatie)
+            elif kaart[2] == 'Vol':
+                if kaart[3] == 1:
+                    vormen1(R_Ovaal_Vol, locatie)
+                elif kaart[2] == 2:
+                    vormen2(R_Ovaal_Vol, locatie)
+                else:
+                    vormen3(R_Ovaal_Vol, locatie)
+        if kaart[1] == 'Golf':
+            if kaart[2] == 'Leeg':
+                if kaart[3] == 1:
+                    vormen1(R_Golf_Leeg, locatie)
+                elif kaart[2] == 2:
+                    vormen2(R_Golf_Leeg, locatie)
+                else:
+                    vormen3(R_Golf_Leeg, locatie)
+            elif kaart[2] == 'Gestreept':
+                if kaart[3] == 1:
+                    vormen1(R_Golf_Gestreept, locatie)
+                elif kaart[2] == 2:
+                    vormen2(R_Golf_Gestreept, locatie)
+                else:
+                    vormen3(R_Golf_Gestreept, locatie)
+            elif kaart[2] == 'Vol':
+                if kaart[3] == 1:
+                    vormen1(R_Golf_Vol, locatie)
+                elif kaart[2] == 2:
+                    vormen2(R_Golf_Vol, locatie)
+                else:
+                    vormen3(R_Golf_Vol, locatie)
+    if kaart[0] == 'Paars':
+        if kaart[1] == 'Ruit':
+            if kaart[2] == 'Leeg':
+                if kaart[3] == 1:
+                    vormen1(P_Ruit_Leeg, locatie)
+                elif kaart[2] == 2:
+                    vormen2(P_Ruit_Leeg, locatie)
+                else:
+                    vormen3(P_Ruit_Leeg, locatie)
+            elif kaart[2] == 'Gestreept':
+                if kaart[3] == 1:
+                    vormen1(P_Ruit_Gestreept, locatie)
+                elif kaart[2] == 2:
+                    vormen2(P_Ruit_Gestreept, locatie)
+                else:
+                    vormen3(P_Ruit_Gestreept, locatie)
+            elif kaart[2] == 'Vol':
+                if kaart[3] == 1:
+                    vormen1(P_Ruit_Vol, locatie)
+                elif kaart[2] == 2:
+                    vormen2(P_Ruit_Vol, locatie)
+                else:
+                    vormen3(P_Ruit_Vol, locatie)
+        if kaart[1] == 'Ovaal':
+            if kaart[2] == 'Leeg':
+                if kaart[3] == 1:
+                    vormen1(P_Ovaal_Leeg, locatie)
+                elif kaart[2] == 2:
+                    vormen2(P_Ovaal_Leeg, locatie)
+                else:
+                    vormen3(P_Ovaal_Leeg, locatie)
+            elif kaart[2] == 'Gestreept':
+                if kaart[3] == 1:
+                    vormen1(P_Ovaal_Gestreept, locatie)
+                elif kaart[2] == 2:
+                    vormen2(P_Ovaal_Gestreept, locatie)
+                else:
+                    vormen3(P_Ovaal_Gestreept, locatie)
+            elif kaart[2] == 'Vol':
+                if kaart[3] == 1:
+                    vormen1(P_Ovaal_Vol, locatie)
+                elif kaart[2] == 2:
+                    vormen2(P_Ovaal_Vol, locatie)
+                else:
+                    vormen3(P_Ovaal_Vol, locatie)
+        if kaart[1] == 'Golf':
+            if kaart[2] == 'Leeg':
+                if kaart[3] == 1:
+                    vormen1(P_Golf_Leeg, locatie)
+                elif kaart[2] == 2:
+                    vormen2(P_Golf_Leeg, locatie)
+                else:
+                    vormen3(P_Golf_Leeg, locatie)
+            elif kaart[2] == 'Gestreept':
+                if kaart[3] == 1:
+                    vormen1(P_Golf_Gestreept, locatie)
+                elif kaart[2] == 2:
+                    vormen2(P_Golf_Gestreept, locatie)
+                else:
+                    vormen3(P_Golf_Gestreept, locatie)
+            elif kaart[2] == 'Vol':
+                if kaart[3] == 1:
+                    vormen1(P_Golf_Vol, locatie)
+                elif kaart[2] == 2:
+                    vormen2(P_Golf_Vol, locatie)
+                else:
+                    vormen3(P_Golf_Vol, locatie)
+    if kaart[0] == 'Groen':
+        if kaart[1] == 'Ruit':
+            if kaart[2] == 'Leeg':
+                if kaart[3] == 1:
+                    vormen1(G_Ruit_Leeg, locatie)
+                elif kaart[2] == 2:
+                    vormen2(G_Ruit_Leeg, locatie)
+                else:
+                    vormen3(G_Ruit_Leeg, locatie)
+            elif kaart[2] == 'Gestreept':
+                if kaart[3] == 1:
+                    vormen1(G_Ruit_Gestreept, locatie)
+                elif kaart[2] == 2:
+                    vormen2(G_Ruit_Gestreept, locatie)
+                else:
+                    vormen3(G_Ruit_Gestreept, locatie)
+            elif kaart[2] == 'Vol':
+                if kaart[3] == 1:
+                    vormen1(G_Ruit_Vol, locatie)
+                elif kaart[2] == 2:
+                    vormen2(G_Ruit_Vol, locatie)
+                else:
+                    vormen3(G_Ruit_Vol, locatie)
+        if kaart[1] == 'Ovaal':
+            if kaart[2] == 'Leeg':
+                if kaart[3] == 1:
+                    vormen1(G_Ovaal_Leeg, locatie)
+                elif kaart[2] == 2:
+                    vormen2(G_Ovaal_Leeg, locatie)
+                else:
+                    vormen3(G_Ovaal_Leeg, locatie)
+            elif kaart[2] == 'Gestreept':
+                if kaart[3] == 1:
+                    vormen1(G_Ovaal_Gestreept, locatie)
+                elif kaart[2] == 2:
+                    vormen2(G_Ovaal_Gestreept, locatie)
+                else:
+                    vormen3(G_Ovaal_Gestreept, locatie)
+            elif kaart[2] == 'Vol':
+                if kaart[3] == 1:
+                    vormen1(G_Ovaal_Vol, locatie)
+                elif kaart[2] == 2:
+                    vormen2(G_Ovaal_Vol, locatie)
+                else:
+                    vormen3(G_Ovaal_Vol, locatie)
+        if kaart[1] == 'Golf':
+            if kaart[2] == 'Leeg':
+                if kaart[3] == 1:
+                    vormen1(G_Golf_Leeg, locatie)
+                elif kaart[2] == 2:
+                    vormen2(G_Golf_Leeg, locatie)
+                else:
+                    vormen3(G_Golf_Leeg, locatie)
+            elif kaart[2] == 'Gestreept':
+                if kaart[3] == 1:
+                    vormen1(G_Golf_Gestreept, locatie)
+                elif kaart[2] == 2:
+                    vormen2(G_Golf_Gestreept, locatie)
+                else:
+                    vormen3(G_Golf_Gestreept, locatie)
+            elif kaart[2] == 'Vol':
+                if kaart[3] == 1:
+                    vormen1(G_Golf_Vol, locatie)
+                elif kaart[2] == 2:
+                    vormen2(G_Golf_Vol, locatie)
+                else:
+                    vormen3(G_Golf_Vol, locatie)
+
 
 """Een functie om alles op het scherm te tekenen, voor tijdens het spel"""
 def DrawSpel():
     WIN.fill(LILA)
     text("Set",(0, 0),(BLACK),50)
-    Grit15()
-    vormen1(R_Ovaal_Gestreept, 175, 225)
-    vormen2(G_Golf_Vol, 175, 0)
-    vormen3(P_Ruit_Leeg, 175, 450)
+    Grit12()
+#    vormen1(R_Ovaal_Gestreept, 175, 225)
+#    vormen2(G_Golf_Vol, 175, 0)
+#    vormen3(P_Ruit_Leeg, 175, 450)
+    DrawKaart(['Paars', 'Ovaal', 'Gestreept', 3 ], (200, 450))
     Nummeriek("1",175, 0)
     WIN.blit(Achterkant, (10, 475))
     pygame.display.update()
