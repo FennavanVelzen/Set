@@ -52,9 +52,14 @@ P_Ovaal_Leeg  = pygame.image.load("Assets/P_Ovaal_Leeg.png")
 P_Ovaal_Gestreept  = pygame.image.load("Assets/P_Ovaal_Gestreept.png")
 P_Ovaal_Vol  = pygame.image.load("Assets/P_Ovaal_Vol.png")
 
-#achterkant kaart
+#andere afbeeldingen
 achterkant = pygame.image.load("Assets/Achterkant.png")
 Achterkant = pygame.transform.scale(achterkant, (150,230))
+legekaart = pygame.image.load("Assets/Blank-Playing-Card.png")
+Legekaart = pygame.transform.scale(legekaart, (155,240))
+voorbeelden = pygame.image.load("Assets/Voorbeelden.jpg")
+Voorbeelden1 = pygame.transform.scale(voorbeelden, (600,450))
+Voorbeelden = pygame.transform.rotate(Voorbeelden1, 90)
 
 
 """Functie om alle combinatie mogelijkheden voor kaarten te genereren.
@@ -97,27 +102,27 @@ def text(Text, positie, kleur,lettergrote):
 
 """Functies om kaarten vormen te maken, van de linker boven hoek van de kaarten"""
 def vormen1(vorm, positiex, positiey):
-    x = positiex+10
-    y = positiey+120
+    x = positiex+5
+    y = positiey+110
     WIN.blit(vorm, (x,y))
 
 def vormen2(vorm, positiex, positiey): #nog nodig hoekpunten kaart
     x = positiex+10
-    y = positiey+120
+    y = positiey+110
     WIN.blit(vorm,(x, y + 25) ) #nog aan aanpassen met hoekputen kaart
     WIN.blit(vorm, (x, y - 25))
 
 def vormen3(vorm, locatie):  #nog nodig hoekpunten kaart
     positiex, positiey = locatie
-    x = positiex+10
-    y = positiey+120
+    x = positiex+6
+    y = positiey+110
     WIN.blit(vorm, (x, y +50)) #nog aan aanpassen met hoekputen kaart
     WIN.blit(vorm, (x, y))
     WIN.blit(vorm, (x, y -50))
     
 """functie voor het schrijven van de nummers in de hoeken van de kaarten"""
 def Nummeriek(a, positiex, positiey):
-    x = positiex+15
+    x = positiex+10
     y = positiey+40
     text(a, (x, y), (BLACK) , 30)
 
@@ -224,9 +229,23 @@ def set_color(img, color):
 DVD = pygame.image.load(os.path.join('Assets', 'DVDWHITE.png'))
 set_color(DVD, BLACK)
 
+def regels():
+    text("Elke kaart heeft 4 eighenschappen, te weten een hoeveelheid, een kleur," 
+         "een vorm en een vulling. Er zijn drie varienten van elke eigenschap"
+         "Een SET bestaat uit 3 kaarten waarvan voor alle 4 eigenschappen afzonderlijk "
+         "geldt dat de variant ervan precies gelijk of volledig verschillend moeten zijn."
+         "Bij elke combinatie van 3 kaarten stel je jezelf steeds voor elke eigenschap apart de vraag:"
+         "is de variant van deze eigenschap op alle kaarten precies gelijk of volledig"
+         "verschillend? Kan je deze vraag voor alle eigenschappen met JA beantwoorden,"
+         "dan heb je een set gevonden",(20,150),BLACK,25)
+
 """Een fuctie die op basis van de eigenschappen van de kaart en locatie deze kan tekenen"""
 #deze functie zou misschien nog ingekort en verbeterd worden.
 def DrawKaart(kaart, locatie):
+    positiex, positiey = locatie
+    x = positiex -15
+    y = positiey +15
+    WIN.blit(Legekaart, (x,y))
     if kaart[0] == 'Rood':                              #alles voor rood
         if kaart[1] == 'Ruit':                          #alles voor ruit en rood
             if kaart[2] == 'Leeg':                      #alles voor ruit en rood en leeg
@@ -429,7 +448,6 @@ def DrawKaart(kaart, locatie):
                 else:
                     vormen3(G_Golf_Vol, locatie)
 
-
 """Een functie om alles op het scherm te tekenen, voor tijdens het spel"""
 def DrawSpel():
     WIN.fill(LILA)
@@ -439,7 +457,7 @@ def DrawSpel():
 #    vormen2(G_Golf_Vol, 175, 0)
 #    vormen3(P_Ruit_Leeg, 175, 450)
     DrawKaart(['Paars', 'Ovaal', 'Gestreept', 3 ], (200, 450))
-    Nummeriek("1",175, 0)
+    Nummeriek("9",200, 450)
     WIN.blit(Achterkant, (10, 475))
     pygame.display.update()
 
@@ -456,6 +474,10 @@ def Drawrules():
     WIN.fill(LILA)
     text("Regels", (0,0),(BLACK),50)
     text("Klik b om terug te gaan", (0,50),(BLACK),50)
+    text("Klik v naar voorbeelden te gaan", (0,100), (BLACK),50)
+    regels()
+#    WIN.blit(Voorbeelden, (0,0))
+
     pygame.display.update()
     
 """functie voor het kunnen aanroepen van een quit voor wanneer er een loop is"""
