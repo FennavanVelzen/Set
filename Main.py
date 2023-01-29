@@ -69,8 +69,8 @@ overige mogelijkheden van combinaties van andere lijsten aan toe."""
 def Kaarten():
     Kleuren = ['Rood', 'Groen', 'Paars'] #lijsten met eigenschap mogelijkheden van de kaarten
     Vormen = ['Ruit', 'Ovaal', 'Golf']
-    Hoeveelheid = [1, 2, 3]
-    Vulling = ['leeg', 'Gestreept' , 'Vol']
+    Hoeveelheid = [1,2,3]
+    Vulling = ['Leeg', 'Gestreept' , 'Vol']
     Kaarten = []                        #lijst om alle kaart combinaties in toe te voegen
     for kleur in Kleuren:
         for vorm in Vormen:
@@ -101,14 +101,16 @@ def text(Text, positie, kleur,lettergrote):
     WIN.blit(service, positie)
 
 """Functies om kaarten vormen te maken, van de linker boven hoek van de kaarten"""
-def vormen1(vorm, positiex, positiey):
+def vormen1(vorm, locatie):
+    positiex, positiey = locatie
     x = positiex+6
     y = positiey+110
     WIN.blit(vorm, (x,y))
 
-def vormen2(vorm, positiex, positiey): #nog nodig hoekpunten kaart
-    x = positiex+6
-    y = positiey+110
+def vormen2(vorm, locatie): #nog nodig hoekpunten kaart
+    positiex, positiey = locatie
+    x = positiex +6
+    y = positiey +110
     WIN.blit(vorm,(x, y + 25) ) #nog aan aanpassen met hoekputen kaart
     WIN.blit(vorm, (x, y - 25))
 
@@ -161,7 +163,7 @@ def Grit12():
     WIN.blit(service, (300, a))
     WIN.blit(service, (350, a))
     WIN.blit(service, (450, a))
-    WIN.blit(service, (550, a))
+    WIN.blit(service, (500, a))
     WIN.blit(service, (600, a))
     WIN.blit(service, (650, a))
     WIN.blit(service, (750, a))
@@ -171,7 +173,7 @@ def Grit12():
     WIN.blit(service, (300, a))
     WIN.blit(service, (350, a))
     WIN.blit(service, (450, a))
-    WIN.blit(service, (550, a))
+    WIN.blit(service, (500, a))
     WIN.blit(service, (600, a))
     WIN.blit(service, (650, a))
     WIN.blit(service, (750, a))
@@ -181,7 +183,7 @@ def Grit12():
     WIN.blit(service, (300, a))
     WIN.blit(service, (350, a))
     WIN.blit(service, (450, a))
-    WIN.blit(service, (550, a))
+    WIN.blit(service, (500, a))
     WIN.blit(service, (600, a))
     WIN.blit(service, (650, a))
     WIN.blit(service, (750, a))
@@ -191,7 +193,7 @@ def Grit12():
     WIN.blit(service, (300, a))
     WIN.blit(service, (350, a))
     WIN.blit(service, (450, a))
-    WIN.blit(service, (550, a))
+    WIN.blit(service, (500, a))
     WIN.blit(service, (600, a))
     WIN.blit(service, (650, a))
     WIN.blit(service, (750, a))
@@ -201,7 +203,7 @@ def Grit12():
     WIN.blit(service, (300, a))
     WIN.blit(service, (350, a))
     WIN.blit(service, (450, a))
-    WIN.blit(service, (550, a))
+    WIN.blit(service, (500, a))
     WIN.blit(service, (600, a))
     WIN.blit(service, (650, a))
     WIN.blit(service, (750, a))
@@ -211,7 +213,7 @@ def Grit12():
     WIN.blit(service, (300, a))
     WIN.blit(service, (350, a))
     WIN.blit(service, (450, a))
-    WIN.blit(service, (550, a))
+    WIN.blit(service, (500, a))
     WIN.blit(service, (600, a))
     WIN.blit(service, (650, a))
     WIN.blit(service, (750, a))
@@ -253,21 +255,21 @@ def DrawKaart(kaart, locatie):
             if kaart[2] == 'Leeg':                      #alles voor ruit en rood en leeg
                 if kaart[3] == 1:
                     vormen1(R_Ruit_Leeg, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(R_Ruit_Leeg, locatie)
                 else:
                     vormen3(R_Ruit_Leeg, locatie)
             elif kaart[2] == 'Gestreept':               #alles voor ruit en rood en gestreept
                 if kaart[3] == 1:
                     vormen1(R_Ruit_Gestreept, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(R_Ruit_Gestreept, locatie)
                 else:
                     vormen3(R_Ruit_Gestreept, locatie)
             elif kaart[2] == 'Vol':                     #alles voor ruit en rood en vol
                 if kaart[3] == 1:
                     vormen1(R_Ruit_Vol, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(R_Ruit_Vol, locatie)
                 else:
                     vormen3(R_Ruit_Vol, locatie)
@@ -275,21 +277,21 @@ def DrawKaart(kaart, locatie):
             if kaart[2] == 'Leeg':
                 if kaart[3] == 1:
                     vormen1(R_Ovaal_Leeg, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(R_Ovaal_Leeg, locatie)
                 else:
                     vormen3(R_Ovaal_Leeg, locatie)
             elif kaart[2] == 'Gestreept':
                 if kaart[3] == 1:
                     vormen1(R_Ovaal_Gestreept, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(R_Ovaal_Gestreept, locatie)
                 else:
                     vormen3(R_Ovaal_Gestreept, locatie)
             elif kaart[2] == 'Vol':
                 if kaart[3] == 1:
                     vormen1(R_Ovaal_Vol, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(R_Ovaal_Vol, locatie)
                 else:
                     vormen3(R_Ovaal_Vol, locatie)
@@ -297,21 +299,21 @@ def DrawKaart(kaart, locatie):
             if kaart[2] == 'Leeg':
                 if kaart[3] == 1:
                     vormen1(R_Golf_Leeg, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(R_Golf_Leeg, locatie)
                 else:
                     vormen3(R_Golf_Leeg, locatie)
             elif kaart[2] == 'Gestreept':
                 if kaart[3] == 1:
                     vormen1(R_Golf_Gestreept, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(R_Golf_Gestreept, locatie)
                 else:
                     vormen3(R_Golf_Gestreept, locatie)
             elif kaart[2] == 'Vol':
                 if kaart[3] == 1:
                     vormen1(R_Golf_Vol, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(R_Golf_Vol, locatie)
                 else:
                     vormen3(R_Golf_Vol, locatie)
@@ -320,21 +322,21 @@ def DrawKaart(kaart, locatie):
             if kaart[2] == 'Leeg':
                 if kaart[3] == 1:
                     vormen1(P_Ruit_Leeg, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(P_Ruit_Leeg, locatie)
                 else:
                     vormen3(P_Ruit_Leeg, locatie)
             elif kaart[2] == 'Gestreept':
                 if kaart[3] == 1:
                     vormen1(P_Ruit_Gestreept, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(P_Ruit_Gestreept, locatie)
                 else:
                     vormen3(P_Ruit_Gestreept, locatie)
             elif kaart[2] == 'Vol':
                 if kaart[3] == 1:
                     vormen1(P_Ruit_Vol, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(P_Ruit_Vol, locatie)
                 else:
                     vormen3(P_Ruit_Vol, locatie)
@@ -342,21 +344,21 @@ def DrawKaart(kaart, locatie):
             if kaart[2] == 'Leeg':
                 if kaart[3] == 1:
                     vormen1(P_Ovaal_Leeg, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(P_Ovaal_Leeg, locatie)
                 else:
                     vormen3(P_Ovaal_Leeg, locatie)
             elif kaart[2] == 'Gestreept':
                 if kaart[3] == 1:
                     vormen1(P_Ovaal_Gestreept, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(P_Ovaal_Gestreept, locatie)
                 else:
                     vormen3(P_Ovaal_Gestreept, locatie)
             elif kaart[2] == 'Vol':
                 if kaart[3] == 1:
                     vormen1(P_Ovaal_Vol, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(P_Ovaal_Vol, locatie)
                 else:
                     vormen3(P_Ovaal_Vol, locatie)
@@ -364,21 +366,21 @@ def DrawKaart(kaart, locatie):
             if kaart[2] == 'Leeg':
                 if kaart[3] == 1:
                     vormen1(P_Golf_Leeg, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(P_Golf_Leeg, locatie)
                 else:
                     vormen3(P_Golf_Leeg, locatie)
             elif kaart[2] == 'Gestreept':
                 if kaart[3] == 1:
                     vormen1(P_Golf_Gestreept, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(P_Golf_Gestreept, locatie)
                 else:
                     vormen3(P_Golf_Gestreept, locatie)
             elif kaart[2] == 'Vol':
                 if kaart[3] == 1:
                     vormen1(P_Golf_Vol, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(P_Golf_Vol, locatie)
                 else:
                     vormen3(P_Golf_Vol, locatie)
@@ -387,21 +389,21 @@ def DrawKaart(kaart, locatie):
             if kaart[2] == 'Leeg':
                 if kaart[3] == 1:
                     vormen1(G_Ruit_Leeg, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(G_Ruit_Leeg, locatie)
                 else:
                     vormen3(G_Ruit_Leeg, locatie)
             elif kaart[2] == 'Gestreept':
                 if kaart[3] == 1:
                     vormen1(G_Ruit_Gestreept, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(G_Ruit_Gestreept, locatie)
                 else:
                     vormen3(G_Ruit_Gestreept, locatie)
             elif kaart[2] == 'Vol':
                 if kaart[3] == 1:
                     vormen1(G_Ruit_Vol, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(G_Ruit_Vol, locatie)
                 else:
                     vormen3(G_Ruit_Vol, locatie)
@@ -409,21 +411,21 @@ def DrawKaart(kaart, locatie):
             if kaart[2] == 'Leeg':
                 if kaart[3] == 1:
                     vormen1(G_Ovaal_Leeg, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(G_Ovaal_Leeg, locatie)
                 else:
                     vormen3(G_Ovaal_Leeg, locatie)
             elif kaart[2] == 'Gestreept':
                 if kaart[3] == 1:
                     vormen1(G_Ovaal_Gestreept, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(G_Ovaal_Gestreept, locatie)
                 else:
                     vormen3(G_Ovaal_Gestreept, locatie)
             elif kaart[2] == 'Vol':
                 if kaart[3] == 1:
                     vormen1(G_Ovaal_Vol, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(G_Ovaal_Vol, locatie)
                 else:
                     vormen3(G_Ovaal_Vol, locatie)
@@ -431,35 +433,126 @@ def DrawKaart(kaart, locatie):
             if kaart[2] == 'Leeg':
                 if kaart[3] == 1:
                     vormen1(G_Golf_Leeg, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(G_Golf_Leeg, locatie)
                 else:
                     vormen3(G_Golf_Leeg, locatie)
             elif kaart[2] == 'Gestreept':
                 if kaart[3] == 1:
                     vormen1(G_Golf_Gestreept, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(G_Golf_Gestreept, locatie)
                 else:
                     vormen3(G_Golf_Gestreept, locatie)
             elif kaart[2] == 'Vol':
                 if kaart[3] == 1:
                     vormen1(G_Golf_Vol, locatie)
-                elif kaart[2] == 2:
+                elif kaart[3] == 2:
                     vormen2(G_Golf_Vol, locatie)
                 else:
                     vormen3(G_Golf_Vol, locatie)
+                
 
+"""Functie om alle kaarten op het scherm te tekenen, houd ook rekening met wannneer er 
+minder dan 12 kaarten zijn"""
+def DrawKaarten(geschud):
+    if len(geschud) >= 12:
+        DrawKaart(geschud[0], (200,0))
+        DrawKaart(geschud[1], (350,0))
+        DrawKaart(geschud[2], (500,0))
+        DrawKaart(geschud[3], (650,0))
+        DrawKaart(geschud[4], (200,225))
+        DrawKaart(geschud[5], (350,225))
+        DrawKaart(geschud[6], (500,225))
+        DrawKaart(geschud[7], (650,225))
+        DrawKaart(geschud[8], (200,450))
+        DrawKaart(geschud[9], (350,450))
+        DrawKaart(geschud[10], (500,450))
+        DrawKaart(geschud[11], (650,450))
+    elif len(geschud) == 9:
+        DrawKaart(geschud[0], (200,0))
+        DrawKaart(geschud[1], (350,0))
+        DrawKaart(geschud[2], (500,0))
+        DrawKaart(geschud[3], (200,225))
+        DrawKaart(geschud[4], (350,225))
+        DrawKaart(geschud[5], (500,225))
+        DrawKaart(geschud[6], (200,450))
+        DrawKaart(geschud[7], (350,450))
+        DrawKaart(geschud[8], (500,450))
+    elif len(geschud) == 6:
+        DrawKaart(geschud[0], (200,0))
+        DrawKaart(geschud[1], (350,0))
+        DrawKaart(geschud[2], (200,225))
+        DrawKaart(geschud[3], (350,225))
+        DrawKaart(geschud[4], (200,450))
+        DrawKaart(geschud[5], (350,450))
+    elif len(geschud) == 3:
+        DrawKaart(geschud[0], (200,0))
+        DrawKaart(geschud[1], (200,225))
+        DrawKaart(geschud[2], (200,450))
+              
+"""Functie om alle nummers/ symbolen op het scherm te tekenen op de kaarten, 
+houd ook rekening met wannneer er minder dan 12 kaarten zijn"""
+def Positie_kaarten(geschud):
+    if len(geschud)>=12:
+        Nummeriek("1",200, 0)
+        Nummeriek("2",350, 0)
+        Nummeriek("3",500, 0)
+        Nummeriek("4",650, 0)
+        Nummeriek("5",200, 225)
+        Nummeriek("6",350, 225)
+        Nummeriek("7",500, 225)
+        Nummeriek("8",650, 225)
+        Nummeriek("9",200, 450)
+        Nummeriek("0",350, 450)
+        Nummeriek("-",500, 450)
+        Nummeriek("+",650, 450)
+    elif len(geschud) == 9:
+        Nummeriek("1",200, 0)
+        Nummeriek("2",350, 0)
+        Nummeriek("3",500, 0)
+        Nummeriek("4",200, 225)
+        Nummeriek("5",350, 225)
+        Nummeriek("6",500, 225)
+        Nummeriek("7",200, 450)
+        Nummeriek("8",350, 450)
+        Nummeriek("9",500, 450)
+    elif len(geschud) == 6:
+        Nummeriek("1",200, 0)
+        Nummeriek("2",350, 0)
+        Nummeriek("3",200, 225)
+        Nummeriek("4",350, 225)
+        Nummeriek("5",200, 450)
+        Nummeriek("6",350, 450)
+    elif len(geschud) == 3:
+        Nummeriek("1",200, 0)
+        Nummeriek("2",200, 225)
+        Nummeriek("3",200, 450)
+
+
+"""Functie die op basis van 3 kaarten checkt of het een SET of CapSet is"""
+def SETcheck(kaart1, kaart2, kaart3):
+    if kaart1[0] == kaart2[0] == kaart3[0] or kaart1[0] != kaart2[0] != kaart3[0]:
+        if kaart1[1] == kaart2[1] == kaart3[1] or kaart1[1] != kaart2[1] != kaart3[1]:
+            if kaart1[2] == kaart2[2] == kaart3[2] or kaart1[2] != kaart2[2] != kaart3[2]:
+                if kaart1[3] == kaart2[3] == kaart3[3] or kaart1[3] != kaart2[3] != kaart3[3]:
+                    return 'SET'
+                else: 
+                    return 'CapSet'
+            else:
+                return 'CapSet'
+        else:
+            return 'CapSet'
+    else:
+        return 'CapSet'
+    
 """Een functie om alles op het scherm te tekenen, voor tijdens het spel"""
-def DrawSpel():
+def DrawSpel(geschud):
     WIN.fill(LILA)
     text("Set",(0, 0),(BLACK),50)
-    Grit12()
-#    vormen1(R_Ovaal_Gestreept, 175, 225)
-#    vormen2(G_Golf_Vol, 175, 0)
-#    vormen3(P_Ruit_Leeg, 175, 450)
-    DrawKaart(['Paars', 'Ovaal', 'Gestreept', 3 ], (200, 450))
-    Nummeriek("9",200, 450)
+#    Grit12()
+    DrawKaarten(geschud)
+    Positie_kaarten(geschud)
     WIN.blit(Achterkant, (10, 475))
     pygame.display.update()
 
@@ -510,11 +603,13 @@ def navigatie(run):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 start = True
+                kaarten = Kaarten()
+                geschud = Schudden(kaarten)
             if event.key == pygame.K_r:
                 rules = True
 
     while start and run:                            #Startscherm
-        DrawSpel()
+        DrawSpel(geschud)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -546,7 +641,6 @@ def navigatie(run):
                     rules = True
                     voorbeeld = False
     return run
-
 
 """Main funcitie die alle functies los oproept"""
 def main():
