@@ -506,7 +506,7 @@ def Positie_kaarten(geschud):
         Nummeriek("9",200, 450)
         Nummeriek("0",350, 450)
         Nummeriek("-",500, 450)
-        Nummeriek("+",650, 450)
+        Nummeriek("=",650, 450)
     elif len(geschud) == 9:
         Nummeriek("1",200, 0)
         Nummeriek("2",350, 0)
@@ -529,23 +529,264 @@ def Positie_kaarten(geschud):
         Nummeriek("2",200, 225)
         Nummeriek("3",200, 450)
 
+"""Functie voor interactie met de kaarten"""
+#misschien ook een check dat er niet 3 keer dezefde kaart geselecteerd kan worden
+def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start):
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+            return run, aantal, kaart1, kaart2 , kaart3, start
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_b:
+                start = False
+            if event.key == pygame.K_1:
+                if kaart1 == False:
+                    kaart1 = geschud[0]
+                    kaart1.append(0)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[0]
+                    kaart2.append(0)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[0]
+                    kaart3.append(0)
+                    aantal +=1
+            elif event.key == pygame.K_2:
+                if kaart1 == False:
+                    kaart1 = geschud[1]
+                    kaart1.append(1)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[1]
+                    kaart2.append(1)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[1]
+                    kaart3.append(1)
+                    aantal +=1
+            elif event.key == pygame.K_3:
+                if kaart1 == False:
+                    kaart1 = geschud[2]
+                    kaart1.append(2)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[2]
+                    kaart2.append(2)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[2]
+                    kaart3.append(2)
+                    aantal +=1
+            elif event.key == pygame.K_4:
+                if kaart1 == False:
+                    kaart1 = geschud[3]
+                    kaart1.append(3)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[3]
+                    kaart2.append(3)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[3]
+                    kaart3.append(3)
+                    aantal +=1
+            elif event.key == pygame.K_5:
+                if kaart1 == False:
+                    kaart1 = geschud[4]
+                    kaart1.append(4)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[4]
+                    kaart2.append(4)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[4]
+                    kaart3.append(4)
+                    aantal +=1
+            elif event.key == pygame.K_6:
+                if kaart1 == False:
+                    kaart1 = geschud[5]
+                    kaart1.append(5)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[5]
+                    kaart2.append(5)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[5]
+                    kaart3.append(5)
+                    aantal +=1
+            elif event.key == pygame.K_7:
+                if kaart1 == False:
+                    kaart1 = geschud[6]
+                    kaart1.append(6)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[6]
+                    kaart2.append(6)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[6]
+                    kaart3.append(6)
+                    aantal +=1
+            elif event.key == pygame.K_8:
+                if kaart1 == False:
+                    kaart1 = geschud[7]
+                    kaart1.append(7)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[7]
+                    kaart2.append(7)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[7]
+                    kaart3.append(7)
+                    aantal +=1
+            elif event.key == pygame.K_9:
+                if kaart1 == False:
+                    kaart1 = geschud[8]
+                    kaart1.append(8)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[8]
+                    kaart2.append(8)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[8]
+                    kaart3.append(8)
+                    aantal +=1
+            elif event.key == pygame.K_0:
+                if kaart1 == False:
+                    kaart1 = geschud[9]
+                    kaart1.append(9)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[9]
+                    kaart2.append(9)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[9]
+                    kaart3.append(9)
+                    aantal +=1
+            elif event.key == pygame.K_MINUS:
+                if kaart1 == False:
+                    kaart1 = geschud[10]
+                    kaart1.append(10)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[10]
+                    kaart2.append(10)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[10]
+                    kaart3.append(10)
+                    aantal +=1
+            elif event.key == pygame.K_EQUALS:
+                if kaart1 == False:
+                    kaart1 = geschud[11]
+                    kaart1.append(11)
+                    aantal +=1
+                elif kaart2 == False:
+                    kaart2 = geschud[11]
+                    kaart2.append(11)
+                    aantal +=1
+                elif kaart3 == False:
+                    kaart3 = geschud[11]
+                    kaart3.append(11)
+                    aantal +=1
+    return run, aantal, kaart1, kaart2 , kaart3, start
 
 """Functie die op basis van 3 kaarten checkt of het een SET of CapSet is"""
-def SETcheck(kaart1, kaart2, kaart3):
+def SETcheck(kaart1, kaart2, kaart3, geschud , seconden):
     if kaart1[0] == kaart2[0] == kaart3[0] or kaart1[0] != kaart2[0] != kaart3[0]:
         if kaart1[1] == kaart2[1] == kaart3[1] or kaart1[1] != kaart2[1] != kaart3[1]:
             if kaart1[2] == kaart2[2] == kaart3[2] or kaart1[2] != kaart2[2] != kaart3[2]:
                 if kaart1[3] == kaart2[3] == kaart3[3] or kaart1[3] != kaart2[3] != kaart3[3]:
-                    return 'SET'
+                    print('SET')
+                    aantal = 0
+                    seconden = 0
+                    if kaart1[4] > kaart2[4]:
+                        if kaart2[4] > kaart3[4]:
+                            del geschud[kaart1[4]]
+                            del geschud[kaart2[4]]
+                            del geschud[kaart3[4]]
+                        elif kaart2[4] < kaart3[4]:
+                            del geschud[kaart1[4]]
+                            del geschud[kaart3[4]]
+                            del geschud[kaart2[4]]
+                    elif kaart2[4] > kaart1[4]:
+                        if kaart1[4]> kaart3[4]:
+                            del geschud[kaart2[4]]
+                            del geschud[kaart1[4]]
+                            del geschud[kaart3[4]]
+                        elif kaart1[4] < kaart3[4]:
+                            del geschud[kaart2[4]]
+                            del geschud[kaart3[4]]
+                            del geschud[kaart1[4]]
+                    elif kaart3[4] > kaart1[4]:
+                        if kaart1[4] > kaart2[4]:
+                            del geschud[kaart3[4]]
+                            del geschud[kaart1[4]]
+                            del geschud[kaart2[4]]
+                        elif kaart1[4] < kaart2[4]:
+                            del geschud[kaart3[4]]
+                            del geschud[kaart2[4]]
+                            del geschud[kaart1[4]]
+                                               
+                    kaart1 = False                #een aantal keer dezefde kaart geselecteerd
+                    kaart2 = False                #en moet zoizo op False gezet worden
+                    kaart3 = False
+                    
+                    return aantal, kaart1, kaart2, kaart3, seconden
                 else: 
-                    return 'CapSet'
+                    print('Capset')
+                    aantal = 0
+                    kaart1 = False
+                    kaart2 = False
+                    kaart3 = False
+                    return aantal, kaart1, kaart2, kaart3, seconden
             else:
-                return 'CapSet'
+                print('Capset')
+                aantal = 0
+                kaart1 = False
+                kaart2 = False
+                kaart3 = False
+                return aantal, kaart1, kaart2, kaart3, seconden
         else:
-            return 'CapSet'
+            print('Capset')
+            aantal = 0
+            kaart1 = False
+            kaart2 = False
+            kaart3 = False
+            return aantal, kaart1, kaart2, kaart3, seconden
     else:
-        return 'CapSet'
-    
+        print('Capset')
+        aantal = 0
+        kaart1 = False
+        kaart2 = False
+        kaart3 = False
+        return aantal, kaart1, kaart2, kaart3, seconden
+
+
+"""Funcite die na 30 seconden de 1e drie kaarten vananderd"""
+#misschien nog kijken naar wanneer er minder dan 12 kaarten zijn.
+def timer(geschud, seconden, kaart1 , kaart2, kaart3):
+    seconden +=1
+    if seconden >= 1800:    #1800 omdat FPS is 60 en 60x30 = 1800
+        if len(geschud)>12:
+            WillekeurigGetal = random.randint(12,(len(geschud)-1))
+            geschud[1], geschud[WillekeurigGetal] = geschud[WillekeurigGetal], geschud[1]
+            WillekeurigGetal = random.randint(12,(len(geschud)-1))
+            geschud[2], geschud[WillekeurigGetal] = geschud[WillekeurigGetal], geschud[2]
+            WillekeurigGetal = random.randint(12,(len(geschud)-1))
+            geschud[0], geschud[WillekeurigGetal] = geschud[WillekeurigGetal], geschud[0]
+            seconden = 0
+            kaart1 = False
+            kaart2 = False
+            kaart3 = False
+    return geschud, seconden, kaart1 , kaart2, kaart3
+
 """Een functie om alles op het scherm te tekenen, voor tijdens het spel"""
 def DrawSpel(geschud):
     WIN.fill(LILA)
@@ -605,20 +846,29 @@ def navigatie(run):
                 start = True
                 kaarten = Kaarten()
                 geschud = Schudden(kaarten)
+                aantal = 0
+                kaart1 = False
+                kaart2 = False
+                kaart3 = False
+                seconden = 0
             if event.key == pygame.K_r:
                 rules = True
 
     while start and run:                            #Startscherm
         DrawSpel(geschud)
+        run, aantal, kaart1, kaart2 , kaart3, start = KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start)
+        if aantal == 3:
+            aantal, kaart1, kaart2, kaart3, seconden = SETcheck(kaart1, kaart2, kaart3, geschud, seconden)
+        geschud, seconden, kaart1 , kaart2, kaart3 = timer(geschud, seconden, kaart1 , kaart2, kaart3)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 return run
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_b:
-                    start = False
+            #if event.type == pygame.KEYDOWN:
+                #if event.key == pygame.K_b:
+                    #start = False
         
-    while rules and run:                            #Regelscerm
+    while rules and run:                            #Regelscherm
         Drawrules()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
