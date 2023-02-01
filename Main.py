@@ -531,14 +531,23 @@ def Positie_kaarten(geschud):
 
 """Functie voor interactie met de kaarten"""
 #misschien ook een check dat er niet 3 keer dezefde kaart geselecteerd kan worden
-def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start):
+def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-            return run, aantal, kaart1, kaart2 , kaart3, start
+            return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_b:
                 start = False
+            if event.key == pygame.K_r:
+                kaarten = Kaarten()
+                geschud = Schudden(kaarten)
+                aantal = 0
+                kaart1 = False
+                kaart2 = False
+                kaart3 = False
+                punten = 0
+                seconden = 0
             if event.key == pygame.K_1:
                 if kaart1 == False:
                     kaart1 = geschud[0]
@@ -694,11 +703,11 @@ def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start):
                 elif kaart3 == False:
                     kaart3 = geschud[11]
                     kaart3.append(11)
-                    aantal +=1
-    return run, aantal, kaart1, kaart2 , kaart3, start
+                    aantal +=1        
+    return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud
 
 """Functie die op basis van 3 kaarten checkt of het een SET of CapSet is"""
-def SETcheck(kaart1, kaart2, kaart3, geschud , seconden):
+def SETcheck(kaart1, kaart2, kaart3, geschud , seconden, punten):
     if kaart1[0] == kaart2[0] == kaart3[0] or kaart1[0] != kaart2[0] != kaart3[0]:
         if kaart1[1] == kaart2[1] == kaart3[1] or kaart1[1] != kaart2[1] != kaart3[1]:
             if kaart1[2] == kaart2[2] == kaart3[2] or kaart1[2] != kaart2[2] != kaart3[2]:
@@ -706,67 +715,65 @@ def SETcheck(kaart1, kaart2, kaart3, geschud , seconden):
                     print('SET')
                     aantal = 0
                     seconden = 0
-                    if kaart1[4] > kaart2[4]:
-                        if kaart2[4] > kaart3[4]:
-                            del geschud[kaart1[4]]
-                            del geschud[kaart2[4]]
-                            del geschud[kaart3[4]]
-                        elif kaart2[4] < kaart3[4]:
-                            del geschud[kaart1[4]]
-                            del geschud[kaart3[4]]
-                            del geschud[kaart2[4]]
-                    elif kaart2[4] > kaart1[4]:
-                        if kaart1[4]> kaart3[4]:
-                            del geschud[kaart2[4]]
-                            del geschud[kaart1[4]]
-                            del geschud[kaart3[4]]
-                        elif kaart1[4] < kaart3[4]:
-                            del geschud[kaart2[4]]
-                            del geschud[kaart3[4]]
-                            del geschud[kaart1[4]]
-                    elif kaart3[4] > kaart1[4]:
-                        if kaart1[4] > kaart2[4]:
-                            del geschud[kaart3[4]]
-                            del geschud[kaart1[4]]
-                            del geschud[kaart2[4]]
-                        elif kaart1[4] < kaart2[4]:
-                            del geschud[kaart3[4]]
-                            del geschud[kaart2[4]]
-                            del geschud[kaart1[4]]
+                    punten += 3
+                    if kaart1[4]> kaart2[4]> kaart3[4]:
+                        del geschud[(kaart1[4])]
+                        del geschud[(kaart2[4])]
+                        del geschud[(kaart3[4])]
+                    elif kaart1[4]> kaart3[4]> kaart2[4]:
+                        del geschud[(kaart1[4])]
+                        del geschud[(kaart3[4])]
+                        del geschud[(kaart2[4])]
+                    elif kaart2[4]> kaart1[4]> kaart3[4]:
+                        del geschud[(kaart2[4])]
+                        del geschud[(kaart1[4])]
+                        del geschud[(kaart3[4])]
+                    elif kaart2[4]> kaart3[4]> kaart1[4]:
+                        del geschud[(kaart2[4])]
+                        del geschud[(kaart3[4])]
+                        del geschud[(kaart1[4])]
+                    elif kaart3[4]> kaart2[4]> kaart1[4]:
+                        del geschud[(kaart3[4])]
+                        del geschud[(kaart2[4])]
+                        del geschud[(kaart1[4])]
+                    elif kaart3[4]> kaart1[4]> kaart2[4]:
+                        del geschud[(kaart3[4])]
+                        del geschud[(kaart1[4])]
+                        del geschud[(kaart2[4])]
                                                
                     kaart1 = False                #een aantal keer dezefde kaart geselecteerd
                     kaart2 = False                #en moet zoizo op False gezet worden
                     kaart3 = False
                     
-                    return aantal, kaart1, kaart2, kaart3, seconden
+                    return aantal, kaart1, kaart2, kaart3, seconden, punten
                 else: 
                     print('Capset')
                     aantal = 0
                     kaart1 = False
                     kaart2 = False
                     kaart3 = False
-                    return aantal, kaart1, kaart2, kaart3, seconden
+                    return aantal, kaart1, kaart2, kaart3, seconden, punten
             else:
                 print('Capset')
                 aantal = 0
                 kaart1 = False
                 kaart2 = False
                 kaart3 = False
-                return aantal, kaart1, kaart2, kaart3, seconden
+                return aantal, kaart1, kaart2, kaart3, seconden, punten
         else:
             print('Capset')
             aantal = 0
             kaart1 = False
             kaart2 = False
             kaart3 = False
-            return aantal, kaart1, kaart2, kaart3, seconden
+            return aantal, kaart1, kaart2, kaart3, seconden, punten
     else:
         print('Capset')
         aantal = 0
         kaart1 = False
         kaart2 = False
         kaart3 = False
-        return aantal, kaart1, kaart2, kaart3, seconden
+        return aantal, kaart1, kaart2, kaart3, seconden, punten
 
 
 """Funcite die na 30 seconden de 1e drie kaarten vananderd"""
@@ -788,14 +795,25 @@ def timer(geschud, seconden, kaart1 , kaart2, kaart3):
     return geschud, seconden, kaart1 , kaart2, kaart3
 
 """Een functie om alles op het scherm te tekenen, voor tijdens het spel"""
-def DrawSpel(geschud):
+def DrawSpel(geschud, punten, HoogsteScore):
     WIN.fill(LILA)
     text("Set",(0, 0),(BLACK),50)
 #    Grit12()
     DrawKaarten(geschud)
     Positie_kaarten(geschud)
+    if punten > HoogsteScore:
+        HoogsteScore = punten
+    
+    text('Punten:',(0,60) , BLACK, 40)
+    text(str(punten),(140,60), BLACK, 40)
+    text('Hoogste ',(0,100) , BLACK, 40)
+    text('score:',(0,140) , BLACK, 40)
+    text(str(HoogsteScore), (110,140), BLACK, 40)
+    text('Terug : b',(0,200), BLACK, 40)
+    text('Reset : r',(0,240), BLACK, 40)
     WIN.blit(Achterkant, (10, 475))
     pygame.display.update()
+    return HoogsteScore
 
 """Een functie om alles op het scherm te tekenen, voor het startscherm"""
 def DrawStart():
@@ -834,7 +852,7 @@ def Quit():
 
 """Funcite voor het navigeren tussen de verschillende schermen
 b - back, spatie-start, r -regels, v-voorbeelden"""
-def navigatie(run):
+def navigatie(run, HoogsteScore):
     start = False
     rules = False
     voorbeeld = False
@@ -850,15 +868,16 @@ def navigatie(run):
                 kaart1 = False
                 kaart2 = False
                 kaart3 = False
+                punten = 0
                 seconden = 0
             if event.key == pygame.K_r:
                 rules = True
 
     while start and run:                            #Startscherm
-        DrawSpel(geschud)
-        run, aantal, kaart1, kaart2 , kaart3, start = KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start)
+        HoogsteScore = DrawSpel(geschud, punten, HoogsteScore)
+        run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud = KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden)
         if aantal == 3:
-            aantal, kaart1, kaart2, kaart3, seconden = SETcheck(kaart1, kaart2, kaart3, geschud, seconden)
+            aantal, kaart1, kaart2, kaart3, seconden, punten = SETcheck(kaart1, kaart2, kaart3, geschud, seconden, punten)
         geschud, seconden, kaart1 , kaart2, kaart3 = timer(geschud, seconden, kaart1 , kaart2, kaart3)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -890,17 +909,18 @@ def navigatie(run):
                 if event.key == pygame.K_b:
                     rules = True
                     voorbeeld = False
-    return run
+    return run, HoogsteScore
 
 """Main funcitie die alle functies los oproept"""
 def main():
+    HoogsteScore = 0
     global run
     run = True
     clock = pygame.time.Clock()
     while run:
         clock.tick(FPS)
         DrawStart()
-        run = navigatie(run)
+        run, HoogsteScore = navigatie(run, HoogsteScore)
                 
     pygame.quit()
 
