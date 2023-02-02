@@ -531,11 +531,11 @@ def Positie_kaarten(geschud):
 
 """Functie voor interactie met de kaarten"""
 #misschien ook een check dat er niet 3 keer dezefde kaart geselecteerd kan worden
-def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden):
+def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden, Pcomp):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-            return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud
+            return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud, Pcomp
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_b:
                 start = False
@@ -548,6 +548,8 @@ def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, s
                 kaart3 = False
                 punten = 0
                 seconden = 0
+                Pcomp = 0
+                Willekeurigtijd = random.randint(0,60*60)
             if event.key == pygame.K_1:
                 if kaart1 == False:
                     kaart1 = geschud[0]
@@ -704,14 +706,14 @@ def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, s
                     kaart3 = geschud[11]
                     kaart3.append(11)
                     aantal +=1        
-    return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud
+    return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud, Pcomp
 
 """Functie die op basis van 3 kaarten checkt of het een SET of CapSet is"""
 def SETcheck(kaart1, kaart2, kaart3, geschud , seconden, punten):
-    if kaart1[0] == kaart2[0] == kaart3[0] or kaart1[0] != kaart2[0] != kaart3[0]:
-        if kaart1[1] == kaart2[1] == kaart3[1] or kaart1[1] != kaart2[1] != kaart3[1]:
-            if kaart1[2] == kaart2[2] == kaart3[2] or kaart1[2] != kaart2[2] != kaart3[2]:
-                if kaart1[3] == kaart2[3] == kaart3[3] or kaart1[3] != kaart2[3] != kaart3[3]:
+    if kaart1[0] == kaart2[0] == kaart3[0] or (kaart1[0] != kaart2[0] and kaart2[0] != kaart3[0] and kaart3[0] != kaart1[0]):
+        if kaart1[1] == kaart2[1] == kaart3[1] or (kaart1[1] != kaart2[1] and kaart2[1] != kaart3[1] and kaart3[1] != kaart1[1]):
+            if kaart1[2] == kaart2[2] == kaart3[2] or (kaart1[2] != kaart2[2] and kaart2[2] != kaart3[2] and kaart3[2] != kaart1[2]):
+                if kaart1[3] == kaart2[3] == kaart3[3] or (kaart1[3] != kaart2[3] and kaart2[3] != kaart3[3] and kaart3[3] != kaart1[3]):
                     print('SET')
                     aantal = 0
                     seconden = 0
@@ -776,8 +778,7 @@ def SETcheck(kaart1, kaart2, kaart3, geschud , seconden, punten):
         return aantal, kaart1, kaart2, kaart3, seconden, punten
 
 
-"""Funcite die na 30 seconden de 1e drie kaarten vananderd"""
-#misschien nog kijken naar wanneer er minder dan 12 kaarten zijn.
+"""Functie die na 30 seconden de 1e drie kaarten vananderd"""
 def timer(geschud, seconden, kaart1 , kaart2, kaart3):
     seconden +=1
     if seconden >= 1800:    #1800 omdat FPS is 60 en 60x30 = 1800
@@ -794,8 +795,58 @@ def timer(geschud, seconden, kaart1 , kaart2, kaart3):
             kaart3 = False
     return geschud, seconden, kaart1 , kaart2, kaart3
 
+"""Een functie om alle SET's op het scherm te vinden"""
+def AlleSETS(geschud):
+    SETS = []
+    if len(geschud) >= 12:
+        for eerste in range(0,10):
+            Ckaart1 = geschud[eerste]
+ 
+            for tweede in range(eerste+1, 11):
+                Ckaart2 = geschud[tweede]
+
+                for derde in range(tweede+1, 12):
+                    Ckaart3 = geschud[derde]
+
+                    if Ckaart1[0] == Ckaart2[0] == Ckaart3[0] or (Ckaart1[0] != Ckaart2[0] and Ckaart2[0] != Ckaart3[0] and Ckaart3[0] != Ckaart1[0]):
+                        if Ckaart1[1] == Ckaart2[1] == Ckaart3[1] or (Ckaart1[1] != Ckaart2[1] and Ckaart2[1] != Ckaart3[1] and Ckaart3[1] != Ckaart1[1]):
+                            if Ckaart1[2] == Ckaart2[2] == Ckaart3[2] or (Ckaart1[2] != Ckaart2[2] and Ckaart2[2] != Ckaart3[2] and Ckaart3[2] != Ckaart1[2]):
+                                if Ckaart1[3] == Ckaart2[3] == Ckaart3[3] or (Ckaart1[3] != Ckaart2[3] and Ckaart2[3] != Ckaart3[3] and Ckaart3[3] != Ckaart1[3]):
+                                    Ckaart1.append(eerste)
+                                    Ckaart2.append(tweede)
+                                    Ckaart3.append(derde)
+                                    SETS.append( [Ckaart1, Ckaart2, Ckaart3] )
+    return SETS
+                    
+"""Een functie om de computer te laten spelen"""
+def Comp(Pcomp, SETS, Willekeurigetijd, Ctijd, geschud,seconden):
+    if len(geschud)<= 12:                               #als game voorbij
+        if len(SETS)==0:
+            text('Klaar', (400,300), BLACK, 80)
+            pygame.display.update()
+    if Ctijd >= Willekeurigetijd:
+        if len(SETS)>=1:
+            WillekeurigeSET = random.randint(0, len(SETS)-1)
+            Willekeurigetijd = random.randint(0,60*60)           #60 seconde is 60*60
+            Ctijd = 0
+            SET = SETS[WillekeurigeSET]
+            ckaart1 = SET[0]
+            ckaart2 = SET[1]
+            ckaart3 = SET[2]
+            del geschud[ckaart3[4]]  #volgorde van SET is altijd van kleinste idex naar grootste
+            del geschud[ckaart2[4]]
+            del geschud[ckaart1[4]]
+            Pcomp += 3
+            del SETS[WillekeurigeSET]
+            seconden = 0
+        Willekeurigetijd = random.randint(0,60*60)
+        Ctijd = 0
+    Ctijd += 1
+    return Pcomp, SETS, Willekeurigetijd, Ctijd, geschud, seconden
+        
+
 """Een functie om alles op het scherm te tekenen, voor tijdens het spel"""
-def DrawSpel(geschud, punten, HoogsteScore):
+def DrawSpel(geschud, punten, HoogsteScore, Pcomp):
     WIN.fill(LILA)
     text("Set",(0, 0),(BLACK),50)
 #    Grit12()
@@ -809,9 +860,14 @@ def DrawSpel(geschud, punten, HoogsteScore):
     text('Hoogste ',(0,100) , BLACK, 40)
     text('score:',(0,140) , BLACK, 40)
     text(str(HoogsteScore), (110,140), BLACK, 40)
-    text('Terug : b',(0,200), BLACK, 40)
-    text('Reset : r',(0,240), BLACK, 40)
+    text('Comp :',(0,200), BLACK, 40)
+    text(str(Pcomp),(135,200), BLACK, 40)
+    text('Terug : b',(0,260), BLACK, 40)
+    text('Reset : r',(0,300), BLACK, 40)
+    
+    
     WIN.blit(Achterkant, (10, 475))
+    
     pygame.display.update()
     return HoogsteScore
 
@@ -870,15 +926,21 @@ def navigatie(run, HoogsteScore):
                 kaart3 = False
                 punten = 0
                 seconden = 0
+                Pcomp = 0
+                Willekeurigetijd = random.randint(0,60*60)
+                Ctijd = 0
             if event.key == pygame.K_r:
                 rules = True
 
     while start and run:                            #Startscherm
-        HoogsteScore = DrawSpel(geschud, punten, HoogsteScore)
-        run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud = KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden)
+        HoogsteScore = DrawSpel(geschud, punten, HoogsteScore, Pcomp)
+        run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud, Pcomp = KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden, Pcomp)
         if aantal == 3:
             aantal, kaart1, kaart2, kaart3, seconden, punten = SETcheck(kaart1, kaart2, kaart3, geschud, seconden, punten)
         geschud, seconden, kaart1 , kaart2, kaart3 = timer(geschud, seconden, kaart1 , kaart2, kaart3)
+        SETS = AlleSETS(geschud)
+        Pcomp, SETS, Willekeurigetijd, Ctijd, geschud, seconden = Comp(Pcomp, SETS, Willekeurigetijd, Ctijd, geschud, seconden)
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
