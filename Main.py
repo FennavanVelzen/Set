@@ -827,7 +827,6 @@ def Comp(Pcomp, SETS, Willekeurigetijd, Ctijd, geschud,seconden):
     if Ctijd >= Willekeurigetijd:
         if len(SETS)>=1:
             WillekeurigeSET = random.randint(0, len(SETS)-1)
-            Willekeurigetijd = random.randint(0,60*60)           #60 seconde is 60*60
             Ctijd = 0
             SET = SETS[WillekeurigeSET]
             ckaart1 = SET[0]
@@ -839,7 +838,6 @@ def Comp(Pcomp, SETS, Willekeurigetijd, Ctijd, geschud,seconden):
             Pcomp += 3
             del SETS[WillekeurigeSET]
             seconden = 0
-        Willekeurigetijd = random.randint(0,60*60)
         Ctijd = 0
     Ctijd += 1
     return Pcomp, SETS, Willekeurigetijd, Ctijd, geschud, seconden
@@ -872,11 +870,12 @@ def DrawSpel(geschud, punten, HoogsteScore, Pcomp):
     return HoogsteScore
 
 """Een functie om alles op het scherm te tekenen, voor het startscherm"""
-def DrawStart():
+def DrawStart(difficulty):
     WIN.fill(LILA)
     text("Set",(325, 250),(PURPLE),100)
     text(" |Klik op spatie om te beginnen|", (75,350),(BLACK),50)
     text(" |Klik op r voor de regels|", (75,400),(BLACK),50)
+    text(" |Je Moeilijkhijdsgraad is|" + str(difficulty), (75, 450),(BLACK), 50)
     pygame.display.update()
     
 """Een functie om alles op het scherm te tekenen, voor het regelscherm"""  
@@ -908,7 +907,12 @@ def Quit():
 
 """Funcite voor het navigeren tussen de verschillende schermen
 b - back, spatie-start, r -regels, v-voorbeelden"""
-def navigatie(run, HoogsteScore):
+def navigatie(run, HoogsteScore, difficulty):
+    moeilijkhijd = {
+        1 : (45*60),
+        2 : (30*60),
+        3 : (15*60)
+        }
     start = False
     rules = False
     voorbeeld = False
@@ -927,10 +931,16 @@ def navigatie(run, HoogsteScore):
                 punten = 0
                 seconden = 0
                 Pcomp = 0
-                Willekeurigetijd = random.randint(0,60*60)
+                Willekeurigetijd = moeilijkhijd[difficulty]
                 Ctijd = 0
             if event.key == pygame.K_r:
                 rules = True
+            if event.key == pygame.K_1:
+                difficulty = 1
+            elif event.key == pygame.K_2:
+                difficulty = 2
+            elif event.key == pygame.K_3:
+                difficulty = 3
 
     while start and run:                            #Startscherm
         HoogsteScore = DrawSpel(geschud, punten, HoogsteScore, Pcomp)
@@ -971,18 +981,19 @@ def navigatie(run, HoogsteScore):
                 if event.key == pygame.K_b:
                     rules = True
                     voorbeeld = False
-    return run, HoogsteScore
+    return run, HoogsteScore, difficulty
 
 """Main funcitie die alle functies los oproept"""
 def main():
+    difficulty = 1
     HoogsteScore = 0
     global run
     run = True
     clock = pygame.time.Clock()
     while run:
         clock.tick(FPS)
-        DrawStart()
-        run, HoogsteScore = navigatie(run, HoogsteScore)
+        DrawStart(difficulty)
+        run, HoogsteScore, difficulty = navigatie(run, HoogsteScore, difficulty)
                 
     pygame.quit()
 
