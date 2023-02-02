@@ -7,7 +7,6 @@ Created on Wed Jan 18 10:50:46 2023
 
 import pygame
 import random
-import os
 pygame.init()
 
 WIN = pygame.display.set_mode((800, 700))
@@ -65,7 +64,6 @@ Voorbeelden = pygame.transform.rotate(Voorbeelden1, 90)
 """Functie om alle combinatie mogelijkheden voor kaarten te genereren.
 Deze functie neemt steeds een eigenschap uit een lijst en voegt hier alle 
 overige mogelijkheden van combinaties van andere lijsten aan toe."""
-
 def Kaarten():
     Kleuren = ['Rood', 'Groen', 'Paars'] #lijsten met eigenschap mogelijkheden van de kaarten
     Vormen = ['Ruit', 'Ovaal', 'Golf']
@@ -81,6 +79,8 @@ def Kaarten():
         
     return Kaarten
 
+
+
 """Fuctie voor het schudden van de lijst met kaarten, deze functie gaat twee keer door
 dezelfde for loop zodat de hoeveelheid kaarten beter geschud is"""
 def Schudden(Kaarten):
@@ -93,12 +93,15 @@ def Schudden(Kaarten):
     return Kaarten
     
 
-"""Een functie die text print in het scherm"""
 
+
+"""Een functie die text print in het scherm"""
 def text(Text, positie, kleur,lettergrote):
     font = pygame.font.SysFont("Times New Roman", lettergrote, True, False)
     service = font.render( Text , True, kleur)
     WIN.blit(service, positie)
+
+
 
 """Functies om kaarten vormen te maken, van de linker boven hoek van de kaarten"""
 def vormen1(vorm, locatie):
@@ -122,115 +125,18 @@ def vormen3(vorm, locatie):  #nog nodig hoekpunten kaart
     WIN.blit(vorm, (x, y))
     WIN.blit(vorm, (x, y -50))
     
+    
+    
+    
 """functie voor het schrijven van de nummers in de hoeken van de kaarten"""
 def Nummeriek(a, positiex, positiey):
     x = positiex+10
     y = positiey+40
     text(a, (x, y), (BLACK) , 30)
 
-"""Functies voor het maken van de 3 figuren, vol en leeg"""
-GOLF = [(300, 300), (250, 250), (200, 300), (150, 250)] #hoekputen
-RUIT = [(400, 360), (350, 400), (400, 440), (450, 400)] #hoekputen
-OVAAL = (40, 50, 130, 50)                               #hoekputen
-
-def GolfVOL():
-    pygame.draw.polygon(WIN, BLACK , GOLF)
-
-def GolfLEEG():
-    pygame.draw.polygon(WIN, BLACK , GOLF ,3)
-    
-def RuitVOL():
-    pygame.draw.polygon(WIN, BLACK , RUIT)
-
-def RuitLEEG():
-    pygame.draw.polygon(WIN, BLACK , RUIT,3)
-    
-def OvaalVOL():
-    pygame.draw.ellipse(WIN, BLACK, OVAAL)
-
-def OvaalLEEG():
-    pygame.draw.ellipse(WIN, BLACK, OVAAL)
 
 
-"""Functie voor grit visualiseren"""
-def Grit12():
-    font = pygame.font.SysFont("Times New Roman", 50, True, False)
-    service = font.render( "." , True, (BLACK))
-    lijn = font.render( "|" , True, (BLACK))
-    a = 0
-    WIN.blit(lijn, (150,a))
-    WIN.blit(service, (200, a))
-    WIN.blit(service, (300, a))
-    WIN.blit(service, (350, a))
-    WIN.blit(service, (450, a))
-    WIN.blit(service, (500, a))
-    WIN.blit(service, (600, a))
-    WIN.blit(service, (650, a))
-    WIN.blit(service, (750, a))
-    a = 200
-    WIN.blit(lijn, (150,a))
-    WIN.blit(service, (200, a))
-    WIN.blit(service, (300, a))
-    WIN.blit(service, (350, a))
-    WIN.blit(service, (450, a))
-    WIN.blit(service, (500, a))
-    WIN.blit(service, (600, a))
-    WIN.blit(service, (650, a))
-    WIN.blit(service, (750, a))
-    a = 225
-    WIN.blit(lijn, (150,a))
-    WIN.blit(service, (200, a))
-    WIN.blit(service, (300, a))
-    WIN.blit(service, (350, a))
-    WIN.blit(service, (450, a))
-    WIN.blit(service, (500, a))
-    WIN.blit(service, (600, a))
-    WIN.blit(service, (650, a))
-    WIN.blit(service, (750, a))
-    a = 425
-    WIN.blit(lijn, (150,a))
-    WIN.blit(service, (200, a))
-    WIN.blit(service, (300, a))
-    WIN.blit(service, (350, a))
-    WIN.blit(service, (450, a))
-    WIN.blit(service, (500, a))
-    WIN.blit(service, (600, a))
-    WIN.blit(service, (650, a))
-    WIN.blit(service, (750, a))
-    a = 450
-    WIN.blit(lijn, (150,a))
-    WIN.blit(service, (200, a))
-    WIN.blit(service, (300, a))
-    WIN.blit(service, (350, a))
-    WIN.blit(service, (450, a))
-    WIN.blit(service, (500, a))
-    WIN.blit(service, (600, a))
-    WIN.blit(service, (650, a))
-    WIN.blit(service, (750, a))
-    a =650
-    WIN.blit(lijn, (150,a))
-    WIN.blit(service, (200, a))
-    WIN.blit(service, (300, a))
-    WIN.blit(service, (350, a))
-    WIN.blit(service, (450, a))
-    WIN.blit(service, (500, a))
-    WIN.blit(service, (600, a))
-    WIN.blit(service, (650, a))
-    WIN.blit(service, (750, a))
-
-
-"""Een fuctie die een afbeedling pixel voor pixel van kleur veranderd"""
-def set_color(img, color):
-    r, g, b = color
-    for x in range(img.get_width()):
-        for y in range(img.get_height()):
-            a = img.get_at((x, y))[3]
-            img.set_at((x, y), (r,g,b,a))  # Set the color of the pixel.
-
-#dingen testen
-DVD = pygame.image.load(os.path.join('Assets', 'DVDWHITE.png'))
-set_color(DVD, BLACK)
-
+"""Regels van het spel printen"""
 def regels():
     text("Elke kaart heeft 4 eigenschappen, te weten een hoeveelheid, een kleur," ,(20,150),BLACK,25)
     text("een vorm en een vulling. Er zijn drie varienten van elke eigenschap",(20,175),BLACK,25)
@@ -243,8 +149,9 @@ def regels():
     text("heb je een set gevonden.",(20,350),BLACK,25)
     text("Uit handleiding SET, Marsha J. Falco",(20,375),BLACK, 15)    
 
+
+
 """Een fuctie die op basis van de eigenschappen van de kaart en locatie deze kan tekenen"""
-#deze functie zou misschien nog ingekort en verbeterd worden.
 def DrawKaart(kaart, locatie):
     positiex, positiey = locatie
     x = positiex -15
@@ -529,13 +436,14 @@ def Positie_kaarten(geschud):
         Nummeriek("2",200, 225)
         Nummeriek("3",200, 450)
 
+
+
 """Functie voor interactie met de kaarten"""
-#misschien ook een check dat er niet 3 keer dezefde kaart geselecteerd kan worden
-def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden, Pcomp):
+def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden, Pcomp, Ctijd):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-            return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud, Pcomp
+            return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud, Pcomp, Ctijd
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_b:
                 start = False
@@ -549,7 +457,7 @@ def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, s
                 punten = 0
                 seconden = 0
                 Pcomp = 0
-                Willekeurigtijd = random.randint(0,60*60)
+                Ctijd = 0
             if event.key == pygame.K_1:
                 if kaart1 == False:
                     kaart1 = geschud[0]
@@ -706,7 +614,7 @@ def KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, s
                     kaart3 = geschud[11]
                     kaart3.append(11)
                     aantal +=1        
-    return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud, Pcomp
+    return run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud, Pcomp, Ctijd
 
 """Functie die op basis van 3 kaarten checkt of het een SET of CapSet is"""
 def SETcheck(kaart1, kaart2, kaart3, geschud , seconden, punten):
@@ -718,7 +626,7 @@ def SETcheck(kaart1, kaart2, kaart3, geschud , seconden, punten):
                     aantal = 0
                     seconden = 0
                     punten += 3
-                    if kaart1[4]> kaart2[4]> kaart3[4]:
+                    if kaart1[4]> kaart2[4]> kaart3[4]:         #Verwijder grootste index eerst zodat deze geen verschuivingen veroorzaakt
                         del geschud[(kaart1[4])]
                         del geschud[(kaart2[4])]
                         del geschud[(kaart3[4])]
@@ -778,6 +686,7 @@ def SETcheck(kaart1, kaart2, kaart3, geschud , seconden, punten):
         return aantal, kaart1, kaart2, kaart3, seconden, punten
 
 
+
 """Functie die na 30 seconden de 1e drie kaarten vananderd"""
 def timer(geschud, seconden, kaart1 , kaart2, kaart3):
     seconden +=1
@@ -790,12 +699,14 @@ def timer(geschud, seconden, kaart1 , kaart2, kaart3):
             WillekeurigGetal = random.randint(12,(len(geschud)-1))
             geschud[0], geschud[WillekeurigGetal] = geschud[WillekeurigGetal], geschud[0]
             seconden = 0
-            kaart1 = False
+            kaart1 = False         #eventuele geselecteerde kaarten gereset
             kaart2 = False
             kaart3 = False
     return geschud, seconden, kaart1 , kaart2, kaart3
 
-"""Een functie om alle SET's op het scherm te vinden"""
+
+
+"""Een functie om alle SET's op het scherm te vinden voor de computer"""
 def AlleSETS(geschud):
     SETS = []
     if len(geschud) >= 12:
@@ -817,6 +728,7 @@ def AlleSETS(geschud):
                                     Ckaart3.append(derde)
                                     SETS.append( [Ckaart1, Ckaart2, Ckaart3] )
     return SETS
+
                     
 """Een functie om de computer te laten spelen"""
 def Comp(Pcomp, SETS, Willekeurigetijd, Ctijd, geschud,seconden):
@@ -847,7 +759,6 @@ def Comp(Pcomp, SETS, Willekeurigetijd, Ctijd, geschud,seconden):
 def DrawSpel(geschud, punten, HoogsteScore, Pcomp):
     WIN.fill(LILA)
     text("Set",(0, 0),(BLACK),50)
-#    Grit12()
     DrawKaarten(geschud)
     Positie_kaarten(geschud)
     if punten > HoogsteScore:
@@ -869,6 +780,8 @@ def DrawSpel(geschud, punten, HoogsteScore, Pcomp):
     pygame.display.update()
     return HoogsteScore
 
+
+
 """Een functie om alles op het scherm te tekenen, voor het startscherm"""
 def DrawStart(difficulty):
     WIN.fill(LILA)
@@ -877,6 +790,7 @@ def DrawStart(difficulty):
     text(" |Klik op r voor de regels|", (75,400),(BLACK),50)
     text(" |Je Moeilijkhijdsgraad is|" + str(difficulty), (75, 450),(BLACK), 50)
     pygame.display.update()
+    
     
 """Een functie om alles op het scherm te tekenen, voor het regelscherm"""  
 def Drawrules():
@@ -888,6 +802,7 @@ def Drawrules():
                 
     pygame.display.update()
 
+
 """Een functie om alles op het scherm te tekenen, voor het voorbeeldenscherm"""  
 def Drawvoorbeeld():
     WIN.fill(LILA)
@@ -895,18 +810,11 @@ def Drawvoorbeeld():
     text("Klik b om terug te gaan", (0,625),(BLACK),30)
     WIN.blit(Voorbeelden, (175,0))
     pygame.display.update()
-    
-"""functie voor het kunnen aanroepen van een quit voor wanneer er een loop is""" 
-def Quit():
-    run = True
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-    return run
 
 
-"""Funcite voor het navigeren tussen de verschillende schermen
-b - back, spatie-start, r -regels, v-voorbeelden"""
+"""Functie voor het navigeren tussen de verschillende schermen
+b - back, spatie - start, r - regels, v - voorbeelden, ook 1, 2 of 3 voor moeilijkheidsgraad
+bevat functies voor het spelen van het spel"""
 def navigatie(run, HoogsteScore, difficulty):
     moeilijkhijd = {
         1 : (45*60),
@@ -944,7 +852,7 @@ def navigatie(run, HoogsteScore, difficulty):
 
     while start and run:                            #Startscherm
         HoogsteScore = DrawSpel(geschud, punten, HoogsteScore, Pcomp)
-        run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud, Pcomp = KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden, Pcomp)
+        run, aantal, kaart1, kaart2 , kaart3, start, punten, seconden, geschud, Pcomp, Ctijd = KaartenSelect(geschud, kaart1, kaart2, kaart3, aantal, run, start, punten, seconden, Pcomp, Ctijd)
         if aantal == 3:
             aantal, kaart1, kaart2, kaart3, seconden, punten = SETcheck(kaart1, kaart2, kaart3, geschud, seconden, punten)
         geschud, seconden, kaart1 , kaart2, kaart3 = timer(geschud, seconden, kaart1 , kaart2, kaart3)
@@ -954,17 +862,15 @@ def navigatie(run, HoogsteScore, difficulty):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-                return run
-            #if event.type == pygame.KEYDOWN:
-                #if event.key == pygame.K_b:
-                    #start = False
+                return run, HoogsteScore, difficulty
+           
         
     while rules and run:                            #Regelscherm
         Drawrules()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-                return run
+                return run, HoogsteScore, difficulty
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_v:
                     voorbeeld = True
@@ -976,12 +882,13 @@ def navigatie(run, HoogsteScore, difficulty):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-                return run
+                return run, HoogsteScore, difficulty
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_b:
                     rules = True
                     voorbeeld = False
     return run, HoogsteScore, difficulty
+
 
 """Main funcitie die alle functies los oproept"""
 def main():
@@ -997,5 +904,5 @@ def main():
                 
     pygame.quit()
 
-if __name__ == "__main__":
+if __name__ == "__main__":          #alleen deze file runnen
     main()
