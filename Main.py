@@ -62,7 +62,7 @@ Voorbeelden = pygame.transform.rotate(Voorbeelden1, 90)
 
 
 """Functie om alle combinatie mogelijkheden voor kaarten te genereren.
-Deze functie neemt steeds een eigenschap uit een lijst en voegt hier alle 
+Deze functie neemt steeds een eigenschap uit een lijst en voegt hier aan alle 
 overige mogelijkheden van combinaties van andere lijsten aan toe."""
 def Kaarten():
     Kleuren = ['Rood', 'Groen', 'Paars'] #lijsten met eigenschap mogelijkheden van de kaarten
@@ -139,7 +139,7 @@ def Nummeriek(a, positiex, positiey):
 """Regels van het spel printen"""
 def regels():
     text("Elke kaart heeft 4 eigenschappen, te weten een hoeveelheid, een kleur," ,(20,150),BLACK,25)
-    text("een vorm en een vulling. Er zijn drie varienten van elke eigenschap",(20,175),BLACK,25)
+    text("een vorm en een vulling. Er zijn drie varienten van elke eigenschap.",(20,175),BLACK,25)
     text("Een SET bestaat uit 3 kaarten waarvan voor alle 4 eigenschappen ",(20,200),BLACK,25)
     text("afzonderlijk geldt dat de variant ervan precies gelijk of volledig",(20,225),BLACK,25)
     text("verschillend moeten zijn. Bij elke combinatie van 3 kaarten stel je jezef" ,(20,250),BLACK,25)
@@ -147,7 +147,8 @@ def regels():
     text("eigenschap op alle kaarten precies gelijk of volledig verschillend? ",(20,300),BLACK,25)
     text("Kan je deze vraag voor alle eigenschappen met JA beantwoorden, dan",(20,325),BLACK,25)
     text("heb je een set gevonden.",(20,350),BLACK,25)
-    text("Uit handleiding SET, Marsha J. Falco",(20,375),BLACK, 15)    
+    text("Uit handleiding SET, Marsha J. Falco",(20,375),BLACK, 15)   
+    text("Om kaarten te kiezen, klik de toest aangegeven op de kaart.",(20,400),BLACK,25)
 
 
 
@@ -786,9 +787,10 @@ def DrawSpel(geschud, punten, HoogsteScore, Pcomp):
 def DrawStart(difficulty):
     WIN.fill(LILA)
     text("Set",(325, 250),(PURPLE),100)
-    text(" |Klik op spatie om te beginnen|", (75,350),(BLACK),50)
-    text(" |Klik op r voor de regels|", (75,400),(BLACK),50)
-    text(" |Je Moeilijkhijdsgraad is|" + str(difficulty), (75, 450),(BLACK), 50)
+    text(" |Start : Spatie|", (230,350),(BLACK),50)
+    text(" |Regels : r|", (265,400),(BLACK),50)
+    text("Moeilijkheidsgraad :" + str(difficulty), (0, 0),(BLACK), 30)
+    text("Kies moeilijkheid: 1, 2 of 3", (0, 30),(BLACK), 30)
     pygame.display.update()
     
     
@@ -796,8 +798,8 @@ def DrawStart(difficulty):
 def Drawrules():
     WIN.fill(LILA)
     text("Regels", (0,0),(BLACK),50)
-    text("Klik b om terug te gaan", (0,50),(BLACK),40)
-    text("Klik v naar voorbeelden te gaan", (0,100), (BLACK),40)
+    text("Terug : b", (0,50),(BLACK),40)
+    text("Voorbeelden : v", (0,100), (BLACK),40)
     regels()
                 
     pygame.display.update()
@@ -817,7 +819,7 @@ b - back, spatie - start, r - regels, v - voorbeelden, ook 1, 2 of 3 voor moeili
 bevat functies voor het spelen van het spel"""
 def navigatie(run, HoogsteScore, difficulty):
     moeilijkhijd = {
-        1 : (45*60),
+        1 : (45*60),                    #houd rekening met 60 FPS
         2 : (30*60),
         3 : (15*60)
         }
@@ -829,7 +831,7 @@ def navigatie(run, HoogsteScore, difficulty):
             run = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                start = True
+                start = True                        #klaarzetten van alle variablen
                 kaarten = Kaarten()
                 geschud = Schudden(kaarten)
                 aantal = 0
@@ -892,7 +894,7 @@ def navigatie(run, HoogsteScore, difficulty):
 
 """Main funcitie die alle functies los oproept"""
 def main():
-    difficulty = 1
+    difficulty = 1                  #standaart moeilijkheid is 1
     HoogsteScore = 0
     global run
     run = True
